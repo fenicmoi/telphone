@@ -1,0 +1,63 @@
+<?
+//  สังกัด
+									$s_sql="SELECT * FROM ministry WHERE  m_id='$minis' ";
+									$s_row=mysql_fetch_array($s_result=mysql_query($s_sql));
+												$s_name=$s_row["m_name"];
+				echo"<table width=990 border=1  cellpadding=0 cellspacing=0 bordercolor=#8B7B8C >";
+				echo"<tr height=30 bgcolor=#66CC33><td colspan=990><div align=center><strong><FONT COLOR=FFFFFF SIZE=5 >$s_name</FONT></strong></div></td></tr>";
+
+
+//ชื่อ หน่วยงาน
+									$d_sql="SELECT * FROM depart WHERE  dep_minis='$minis' ORDER BY dep_impo ASC";
+									$d_result=mysql_query($d_sql);
+									$d_num=mysql_num_rows($d_result);
+									if ($d_num>0)
+									{
+											while($d_row=mysql_fetch_array($d_result))
+											{
+													$d_name=$d_row["dep_name"];
+													$dep_id=$d_row["dep_id"];
+													echo"<tr height=25 bgcolor=#33CCCC ><td colspan=190><strong><div align=left><FONT COLOR=FFFFFF  SIZE=3>$d_name</FONT></strong></div></td><td colspan=300><B><FONT  COLOR=FFFFFF>ที่ตั้งหน่วยงาน</FONT></B></td><td colspan=200><B><FONT COLOR=FFFFFF>หมายเลขโทรศัพท์</FONT></B></td><td colspan=300><B><FONT  COLOR=FFFFFF>website / e-mail</FONT></B></td></tr>";
+
+													// ข้อมูลหัวหน้าส่วน
+														$g_sql="SELECT * FROM govern WHERE  g_dep='$dep_id'  ORDER BY g_impo ASC";
+														$g_result=mysql_query($g_sql);
+														$g_num=mysql_num_rows($g_result);
+														if ($g_num>0)
+														{
+															while($g_row=mysql_fetch_array($g_result))
+															{
+																$g_id=$g_row["g_id"];
+																$g_position=$g_row["g_position"];
+																$g_head_th=$g_row["g_head_th"];
+																$g_add=$g_row["g_add"];
+																$g_phone=$g_row["g_phone"];
+																$g_email=$g_row["g_email"];
+																$g_web=$g_row["g_web"];
+
+
+
+
+																echo"<tr valign=top bgcolor=#FFFFFF><td colspan=190><div align=left> &nbsp;&nbsp;<B><FONT  COLOR=006600>$g_position</FONT></B> <BR>  &nbsp;&nbsp; ";
+?><a href="javascript:popup('member/detail_data.php?g_id=<? echo "$g_id";?>','',950,500)" ><?
+																echo"$g_head_th";
+?></a><?
+																echo"<BR><BR></div></td>";
+																echo"<td colspan=300><div align=left>$g_add </div></td>";
+																echo"<td colspan=200><div align=left>$g_phone </div></td>";
+																echo"<td colspan=300><div align=left>$g_web <BR>$g_email</div></td></tr>";
+
+
+															}
+														}
+													// สิ้นสุด การแสดง ข้อมูลหัวหน้าส่วน
+
+											}
+									}
+									else     //กรณีไม่มี หน่วยงาน
+									{
+													echo"<tr height=25 bgcolor=#FFFFCC><td colspan=990><div align=center><strong><FONT COLOR=red>ไม่พบข้อมูล</FONT></strong></div></td></tr>";
+									}
+
+				echo"</table>";
+?>

@@ -1,0 +1,78 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+
+<!-- TemplateBeginEditable name="doctitle" -->
+<title>นามสงเคราะห์ส่วนราชการจังหวัดภูเก็ต</title>
+<!-- TemplateEndEditable --><meta http-equiv="Content-Type" content="text/html; charset=windows-874">
+<style type="text/css">
+<!--
+body,td,th {
+	font-family: MS Sans Serif;
+	font-size: 15px;
+	color: #000000;
+}
+a {
+	font-family: MS Sans Serif;
+	font-size: 16px;
+	color: #000000;
+}
+a:link {
+	text-decoration: none;
+}
+a:visited {
+	text-decoration: none;
+	color: #FF0000;
+}
+a:hover {
+	text-decoration: none;
+	color: #FF0000;
+}
+a:active {
+	text-decoration: none;
+	color: #FF0000;
+}
+body {
+	margin-top: 10px;
+}
+.style12 {font-size: 16px}
+-->
+</style>
+<!-- TemplateBeginEditable name="head" --><!-- TemplateEndEditable -->
+</head>
+
+<body>
+			
+
+<div align="center">
+  <table width="990" border="0" cellspacing="0" cellpadding="0">
+    <tr bgcolor="#99CCFF">
+      <td><div align="center"><img src="../image/top03.gif" width="990" height="200" border="0"></div></td>
+    </tr>
+    <tr>
+      <td height="30" align="center" valign="middle" bgcolor="#99CCFF"><img src="../image/tap_admin.gif" width="980" height="25" border="0" usemap="#Map">
+        <map name="Map">
+          <area shape="rect" coords="18,2,78,22" href="../admin/minis_add.php" target="_parent">
+          <area shape="rect" coords="104,4,186,22" href="../admin/dep_add.php" target="_parent">
+          <area shape="rect" coords="218,5,290,23" href="../admin/head_add.php" target="_parent">
+          <area shape="rect" coords="326,4,413,21" href="../admin/user_add.php" target="_parent">
+          <area shape="rect" coords="450,5,511,22" href="../admin/user_relation.php" target="_parent">
+          <area shape="rect" coords="544,5,665,22" href="../admin/ch_pass.php" target="_parent">
+          <area shape="rect" coords="860,6,958,22" href="../index.php" target="_parent">
+          <area shape="rect" coords="772,3,832,25" href="../manual/test.txt" target="_blank">
+        </map></td>
+    </tr>
+    <tr align="center" valign="top" bgcolor="#E0E0E0">
+      <td height="322"><!-- TemplateBeginEditable name="EditRegion3" -->
+        <p>&nbsp;</p>
+        <!-- TemplateEndEditable -->
+	  
+	  </td>
+    </tr>
+    <tr align="center" valign="top">
+      <td><img src="../image/end.gif" width="980" height="130"></td>
+    </tr>
+  </table>
+</div>
+</body>
+</html>

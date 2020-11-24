@@ -1,0 +1,158 @@
+<?
+			session_start(); 
+			$_SESSION["u_user"];
+?>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html><!-- InstanceBegin template="../Templates/temp01.dwt" codeOutsideHTMLIsLocked="false" -->
+<head>
+
+<!-- InstanceBeginEditable name="doctitle" -->
+<title>นามสงเคราะห์ส่วนราชการจังหวัดภูเก็ต</title>
+<!-- InstanceEndEditable --><meta http-equiv="Content-Type" content="text/html; charset=windows-874">
+<style type="text/css">
+<!--
+body,td,th {
+	font-family: MS Sans Serif;
+	font-size: 15px;
+	color: #000000;
+}
+a {
+	font-family: MS Sans Serif;
+	font-size: 16px;
+	color: #000000;
+}
+a:link {
+	text-decoration: none;
+}
+a:visited {
+	text-decoration: none;
+	color: #FF0000;
+}
+a:hover {
+	text-decoration: none;
+	color: #FF0000;
+}
+a:active {
+	text-decoration: none;
+	color: #FF0000;
+}
+body {
+	margin-top: 10px;
+}
+.style12 {font-size: 16px}
+-->
+</style>
+<Script language="JavaScript">
+function validForm()
+{
+formObj = document.add_dep;
+if((formObj.impo.value=="") || (formObj.position.value=="") || (formObj.name.value=="") )
+{
+alert("กรุณากรอกข้อมูลให้ครบถ้วน");
+return false;
+}
+else if(isNaN(document.add_dep.impo.value)) 
+{		alert("กรุณากรอกลำดับข้อมูล เป็นตัวเลข") ;				return false;		}
+
+else
+return true;
+}
+</script>
+<!-- InstanceBeginEditable name="head" -->
+<style type="text/css">
+<!--
+.style16 {font-size: 18px}
+.style29 {color: #0000FF}
+-->
+</style>
+<!-- InstanceEndEditable -->
+</head>
+
+<body>
+			
+
+<div align="center">
+  <table width="990" border="0" cellspacing="0" cellpadding="0">
+    <tr bgcolor="#99CCFF">
+      <td><div align="center"><img src="../image/top02.gif" width="990" height="200" border="0"></div></td>
+    </tr>
+    <tr>
+      <td height="30" align="center" valign="middle" bgcolor="#99CCFF"><img src="../image/tap_user.gif" width="980" height="25" border="0" usemap="#Map">
+        <map name="Map">
+          <area shape="rect" coords="44,2,154,23" href="show_data.php" target="_parent">
+          <area shape="rect" coords="205,3,322,23" href="show_dep.php" target="_parent">
+          <area shape="rect" coords="371,3,487,22" href="ch_pass.php" target="_parent">
+          <area shape="rect" coords="859,6,961,22" href="../index.php" target="_parent">
+          <area shape="rect" coords="774,0,833,24" href="../manual/manual_user.pdf" target="_blank">
+      </map></td>
+    </tr>
+    <tr align="center" valign="top" bgcolor="#E0E0E0">
+      <td height="322"><!-- InstanceBeginEditable name="EditRegion3" -->
+        <p><img src="../image/ad_h_pass.gif" width="375" height="43"><br>
+          <br>
+          <br>
+        </p>
+		<form action="ch_pass.php" method="post" name="pwd" target="_parent" id="pwd">
+		  <p> </p>
+		  <?
+		include ("../connection/StartConnect.inc");	
+		include ("../code/show_user.php");	
+			if ($u_num>0)		
+			{
+					  	if ($chk=='recal')
+						{
+							include ("../code/code_pwd.php");  						
+						}
+		?>
+          <table width="400" border="1" cellpadding="0" cellspacing="0" bordercolor="#006600" bgcolor="#FDFEE0">
+            <tr valign="middle">
+              <td width="187" height="35"><div align="right" class="style12 style29"><strong><span class="style18 ">รหัสผ่านเดิม&nbsp;</span></strong></div></td>
+              <td width="207" height="35"><div align="left" class="style16">&nbsp;
+                      <input name="old" type="password" id="old2" size="20" maxlength="10">
+              </div></td>
+            </tr>
+            <tr valign="middle">
+              <td height="35"><div align="right" class="style12 style20 style19 style29"><strong>รหัสผ่านใหม่&nbsp;</strong></div></td>
+              <td height="35"><div align="left" class="style16">&nbsp;
+                      <input name="new" type="password" id="new" size="20" maxlength="10">
+              </div></td>
+            </tr>
+            <tr valign="middle">
+              <td height="35"><div align="right" class="style12 style29"><strong>ยืนยันรหัสผ่านใหม่&nbsp;</strong></div></td>
+              <td height="35"><div align="left" class="style16">&nbsp;
+                      <input name="renew" type="password" id="renew" size="20" maxlength="10">
+              </div></td>
+            </tr>
+            <tr valign="middle">
+              <td height="35" colspan="2"><div align="right"></div>
+                  <div align="center">
+                    <input name="chk" type="hidden" id="chk" value="recal">
+                    <input name="submit" type="submit" id="submit" value="ตกลง">
+&nbsp;
+        <input name="cancle" type="reset" id="cancle" value="ยกเลิก">
+        <input name="u_user" type="hidden" id="u_user" value="<? echo "$u_user"; ?>">
+                </div></td>
+            </tr>
+          </table>
+          <?
+	   }
+			else
+			{
+					?>
+					<SCRIPT language=JAVASCRIPT>window.location.replace('../index.php')</SCRIPT>	
+					<?
+			}
+			  include ("../connection/EndConnect.inc");  
+		?>
+		</form>
+      <!-- InstanceEndEditable -->
+	  
+	  </td>
+    </tr>
+    <tr align="center" valign="top">
+      <td><img src="../image/end.gif" width="980" height="130"></td>
+    </tr>
+  </table>
+</div>
+</body>
+<!-- InstanceEnd --></html>
