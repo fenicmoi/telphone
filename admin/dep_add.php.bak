@@ -1,0 +1,224 @@
+<?
+			session_start(); 
+			$_SESSION["u_user"];
+?>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html><!-- InstanceBegin template="/Templates/temp02.dwt" codeOutsideHTMLIsLocked="false" -->
+<head>
+
+<!-- InstanceBeginEditable name="doctitle" -->
+<title>นามสงเคราะห์ส่วนราชการจังหวัดตรัง</title>
+<!-- InstanceEndEditable --><meta http-equiv="Content-Type" content="text/html; charset=windows-874">
+<style type="text/css">
+<!--
+body,td,th {
+	font-family: MS Sans Serif;
+	font-size: 15px;
+	color: #000000;
+}
+a {
+	font-family: MS Sans Serif;
+	font-size: 16px;
+	color: #000000;
+}
+a:link {
+	text-decoration: none;
+}
+a:visited {
+	text-decoration: none;
+	color: #FF0000;
+}
+a:hover {
+	text-decoration: none;
+	color: #FF0000;
+}
+a:active {
+	text-decoration: none;
+	color: #FF0000;
+}
+body {
+	margin-top: 10px;
+}
+.style12 {font-size: 16px}
+-->
+</style>
+<!-- InstanceBeginEditable name="head" -->
+<style type="text/css">
+<!--
+.style13 {
+	color: #0000FF;
+	font-weight: bold;
+}
+.style14 {
+	color: #FF0000;
+	font-weight: bold;
+}
+.style15 {color: #FF0000}
+-->
+</style>
+<!-- InstanceEndEditable -->
+</head>
+
+<body>
+			
+
+<div align="center">
+  <table width="990" border="0" cellspacing="0" cellpadding="0">
+    <tr bgcolor="#99CCFF">
+      <td><div align="center"><img src="../image/top03.gif" width="990" height="200" border="0"></div></td>
+    </tr>
+    <tr>
+      <td height="30" align="center" valign="middle" bgcolor="#99CCFF"><img src="../image/tap_admin.gif" width="980" height="25" border="0" usemap="#Map">
+        <map name="Map">
+          <area shape="rect" coords="18,2,78,22" href="minis_add.php" target="_parent">
+          <area shape="rect" coords="104,4,186,22" href="dep_add.php" target="_parent">
+          <area shape="rect" coords="218,5,290,23" href="head_add.php" target="_parent">
+          <area shape="rect" coords="326,4,413,21" href="user_add.php" target="_parent">
+          <area shape="rect" coords="450,5,511,22" href="user_relation.php" target="_parent">
+          <area shape="rect" coords="544,5,665,22" href="ch_pass.php" target="_parent">
+          <area shape="rect" coords="860,6,958,22" href="../index.php" target="_parent">
+          <area shape="rect" coords="772,3,832,25" href="../manual/test.txt" target="_blank">
+        </map></td>
+    </tr>
+    <tr align="center" valign="top" bgcolor="#E0E0E0">
+      <td height="322"><!-- InstanceBeginEditable name="EditRegion3" -->
+<script type="text/javascript"> 
+function popup(url,name,windowWidth,windowHeight){ 
+myleft=(screen.width)?(screen.width-windowWidth)/2:100; 
+mytop=(screen.height)?(screen.height-windowHeight)/2:100; 
+properties = "width="+windowWidth+",height="+windowHeight; 
+properties +=",scrollbars=yes, top="+mytop+",left="+myleft; 
+window.open(url,name,properties); 
+} 
+</script> 
+	  <img src="../image/ad_h_dep.gif" width="375" height="43">
+	  <?
+			include ("../connection/StartConnect.inc");	
+			include ("../code/show_user.php");	
+			if ($u_num>0)
+			{		
+					include ("../code/ad_dep_add.php");	
+			?>
+        <form action="dep_add.php" method="post" name="form1" target="_parent">
+  <table width="900" border="2" cellpadding="0" cellspacing="2" bordercolor="#FFFFFF">
+    <tr>
+      <td align="center" valign="top"><table width="890" border="0" cellspacing="3" cellpadding="4">
+        <tr>
+          <td colspan="2"><div align="left">เพิ่มหน่วยงาน </div></td>
+        </tr>
+        <tr>
+          <td width="75">&nbsp;</td>
+          <td width="840" align="left" valign="middle">
+            <select name="minis" id="select2">
+              <option value="12" selected>เลือกกระทรวง</option>
+              <?  include ("../code/list_minis.php");		  ?>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>&nbsp;</td>
+          <td align="left" valign="middle">ชื่อหน่วยงาน<input name="a_dep" type="text" id="a_dep2" size="100" maxlength="150"><BR>
+            &nbsp;&nbsp;&nbsp;ลำดับ
+            <input name="a_d_impo" type="text" id="a_d_impo" size="10" maxlength="3"></td>
+        </tr>
+        <tr>
+          <td>&nbsp;</td>
+          <td align="left" valign="middle"><input type="submit" name="Submit" value="ตกลง">
+              <input name="Submit2" type="reset" value="ยกเลิก">
+              <input name="recal" type="hidden" id="recal" value="recal"></td>
+        </tr>
+        <tr>
+          <td colspan="2" align="center" valign="top">
+            <?
+		  			include ("../code/del_dep.php");	
+		  			include ("../code/dep_show_last.php");	
+		  ?>
+</td>
+          </tr>
+      </table></td>
+    </tr>
+  </table>
+        </form>
+        <br>
+        <table width="900" border="2" cellpadding="0" cellspacing="2" bordercolor="#FFFFFF">
+          <tr>
+            <td>
+			  <form action="dep_add.php" method="post" name="form2" target="_parent">
+			    <table width="890" border="0" cellspacing="3" cellpadding="4">
+                  <tr align="left" valign="top">
+                    <td colspan="2">ข้อมูลหน่วยงานทั้งหมด</td>
+                  </tr>
+                  <tr>
+                    <td width="68">&nbsp;</td>
+                    <td width="797" align="left" valign="top"><?
+			  	if ($hide02=='recal')
+				{
+							  		$m2_sql="SELECT * FROM ministry WHERE  m_id='$minis2' ";
+									$msee2_row=mysql_fetch_array(mysql_query($m2_sql));
+												$m_name2=$msee2_row["m_name"];
+				}
+				else
+				{
+												$minis2="12";
+												$m_name2="กระทรวงมหาดไทย";
+				}
+			  ?>
+                      <select name="minis2" id="minis2">
+                        <option value="<? echo"$minis2";?>" selected><? echo "$m_name2";?></option>
+                        <?
+							  		$presee_sql="SELECT * FROM ministry  ORDER BY m_impo";
+									$presee_result=mysql_query($presee_sql);
+									$presee_num=mysql_num_rows($presee_result);
+									if ($presee_num>0)
+									 {
+											while($presee_row=mysql_fetch_array($presee_result))
+											{	
+												$m_id2=$presee_row["m_id"];
+												$m_name2=$presee_row["m_name"];
+												?>
+                        <option value="<? echo"$m_id2"?>"><? echo"$m_name2"?></option>
+                        <?
+											}
+							  			}
+							  		else
+										{
+											?>
+                        <option value="0">NoData</option>
+                        <?
+										}
+							  ?>
+                      </select>
+                      <input type="submit" name="Submit3" value="ค้นหา">
+                      <input name="hide02" type="hidden" id="hide02" value="recal"></td>
+                  </tr>
+                  <tr>
+                    <td colspan="2" align="center" valign="top"><?include ("../code/show_dep.php");	?></td>
+                  </tr>
+                  <tr>
+                    <td colspan="2" align="center" valign="top"><div align="left"><span class="style14">* </span><span class="style13">การลบ &quot;<span class="style15">หน่วยงาน</span>&quot; จะทำให้ ข้อมูล  &quot;<span class="style15">ผู้บริหาร</span>&quot; ของหน่วยงานนั้น และ &quot;<span class="style15">การผูกสิทธิ์</span>&quot; ถูกลบไปด้วย</span></div></td>
+                  </tr>
+                </table>
+              </form>			</td>
+          </tr>
+        </table>
+        <?
+			}
+			else
+			{
+					?>
+					<SCRIPT language=JAVASCRIPT>window.location.replace('../index.php')</SCRIPT>	
+					<?
+			}
+	  include ("../connection/EndConnect.inc");  
+	  ?>
+<!-- InstanceEndEditable -->
+	  
+	  </td>
+    </tr>
+    <tr align="center" valign="top">
+      <td><img src="../image/end.gif" width="980" height="130"></td>
+    </tr>
+  </table>
+</div>
+</body>
+<!-- InstanceEnd --></html>

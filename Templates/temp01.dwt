@@ -1,0 +1,91 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+
+<!-- TemplateBeginEditable name="doctitle" -->
+<title>นามสงเคราะห์ส่วนราชการจังหวัดภูเก็ต</title>
+<!-- TemplateEndEditable --><meta http-equiv="Content-Type" content="text/html; charset=windows-874">
+<style type="text/css">
+<!--
+body,td,th {
+	font-family: MS Sans Serif;
+	font-size: 15px;
+	color: #000000;
+}
+a {
+	font-family: MS Sans Serif;
+	font-size: 16px;
+	color: #000000;
+}
+a:link {
+	text-decoration: none;
+}
+a:visited {
+	text-decoration: none;
+	color: #FF0000;
+}
+a:hover {
+	text-decoration: none;
+	color: #FF0000;
+}
+a:active {
+	text-decoration: none;
+	color: #FF0000;
+}
+body {
+	margin-top: 10px;
+}
+.style12 {font-size: 16px}
+-->
+</style>
+<Script language="JavaScript">
+function validForm()
+{
+formObj = document.add_dep;
+if((formObj.impo.value=="") || (formObj.position.value=="") || (formObj.name.value=="") )
+{
+alert("กรุณากรอกข้อมูลให้ครบถ้วน");
+return false;
+}
+else if(isNaN(document.add_dep.impo.value)) 
+{		alert("กรุณากรอกลำดับข้อมูล เป็นตัวเลข") ;				return false;		}
+
+else
+return true;
+}
+</script>
+<!-- TemplateBeginEditable name="head" --><!-- TemplateEndEditable -->
+</head>
+
+<body>
+			
+
+<div align="center">
+  <table width="990" border="0" cellspacing="0" cellpadding="0">
+    <tr bgcolor="#99CCFF">
+      <td><div align="center"><img src="../image/top02.gif" width="990" height="200" border="0"></div></td>
+    </tr>
+    <tr>
+      <td height="30" align="center" valign="middle" bgcolor="#99CCFF"><img src="../image/tap_user.gif" width="980" height="25" border="0" usemap="#Map">
+        <map name="Map">
+          <area shape="rect" coords="44,2,154,23" href="../member/show_data.php" target="_parent">
+          <area shape="rect" coords="205,3,322,23" href="../member/show_dep.php" target="_parent">
+          <area shape="rect" coords="371,3,487,22" href="../member/ch_pass.php" target="_parent">
+          <area shape="rect" coords="859,6,961,22" href="../index.php" target="_parent">
+          <area shape="rect" coords="774,0,833,24" href="../manual/manual_user.pdf" target="_blank">
+      </map></td>
+    </tr>
+    <tr align="center" valign="top" bgcolor="#E0E0E0">
+      <td height="322"><!-- TemplateBeginEditable name="EditRegion3" -->
+        <p>&nbsp;</p>
+        <!-- TemplateEndEditable -->
+	  
+	  </td>
+    </tr>
+    <tr align="center" valign="top">
+      <td><img src="../image/end.gif" width="980" height="130"></td>
+    </tr>
+  </table>
+</div>
+</body>
+</html>

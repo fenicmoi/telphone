@@ -1,0 +1,54 @@
+<?	
+if ($type_s==2)					{	$type_n='หน่วยงาน';	}
+else if ($type_s==3)			{	$type_n='ตำแหน่ง';	}
+else if ($type_s==4)			{	$type_n='ชื่อ-สกุล';	}
+else if ($type_s==5)			{	$type_n='ที่ตั้งหน่วยงาน';	}
+else if ($type_s==6)			{	$type_n='website';	}
+else if ($type_s==7)			{	$type_n='e-mail';	}
+else										{	$type_n='สังกัด';		$type_s=1;	 }
+?>
+<B>หมวดการค้นหา >></B>
+			    <select name="menu1" onChange="MM_jumpMenu('parent',this,0)">
+                  <option selected><? echo "$type_n";?></option>
+                  <option value="?type_s=1">สังกัด</option>
+                  <option value="?type_s=2">หน่วยงาน</option>
+                  <option value="?type_s=3">ตำแหน่ง</option>
+                  <option value="?type_s=4">ชื่อ-สกุล</option>
+                  <option value="?type_s=5">ที่ตั้งหน่วยงาน</option>
+                  <option value="?type_s=6">website</option>
+                  <option value="?type_s=7">e-mail</option>
+                  </select>		
+
+
+&nbsp;&nbsp;&nbsp;&nbsp;
+<B>คำค้น >> </B> <?
+if ($type_s==1)
+{
+			  	if ($hide01=='recal')
+				{
+					$key_s=$key_search;
+							  		$m_sql="SELECT * FROM ministry WHERE  m_id='$minis' ";
+									$presee_row=mysql_fetch_array(mysql_query($m_sql));
+												$m_name=$presee_row["m_name"];
+				}
+				else
+				{
+												$key_s="ระบุคำค้น";
+												$minis="12";
+												$m_name="กระทรวงมหาดไทย";
+				}
+ ?>
+			<select name="minis" id="select">
+                  <option value="<? echo"$minis";?>" selected><? echo "$m_name";?></option>
+                  <?   include ("list_minis.php");		  ?>
+              </select>
+ <?
+ }
+
+else
+{ ?>
+<input name="key_w" type="text" value="<? echo"$key_w"; ?>" id="key_w" size="35" maxlength="50">
+<? }
+?>
+              <input type="submit" name="Submit" value="ค้นหา">
+              <input name="hide01" type="hidden" id="hide012" value="recal">				

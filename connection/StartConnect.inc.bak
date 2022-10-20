@@ -1,0 +1,8 @@
+  <?
+	$hostmame="localhost";
+	$username="trang_publicndb";
+	$password="BIPcavs0";
+	$link=mysql_connect($hostname,$username,$password);
+	mysql_query("USE trang_publicndb;");
+	mysql_query("set NAMES tis620 ");
+?>
