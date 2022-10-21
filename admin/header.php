@@ -81,7 +81,7 @@ A:link {TEXT-DECORATION: none}
 									<i class="fas fa-print"></i> รายงาน
 								</a>
 								<div class="dropdown-menu">
-									<a class="dropdown-item" href="#" data-toggle="modal" data-target="#modelReport1">รายชื่อ User</a>
+									<a class="dropdown-item" href="check-update.php">Update ล่าสุด</a>
 									<a class="dropdown-item" href="#">Link 2</a>
 									<a class="dropdown-item" href="#">Link 3</a>
 								</div>
