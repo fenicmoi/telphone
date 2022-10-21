@@ -64,7 +64,7 @@ if($num_row > 0){?>
       <!-- <tr>
           <td><i class="fa fa-mobile"></i>ที่อยู่</td>
           <td><?php //echo $row["g_add"];?></td>
-      </tr> -->
+      </tr>  -->
       <tr>
           <td><i class="fa fa-mobile"></i>วันที่ Update</td>
           <td><?php echo $row["g_update"];?></td>
