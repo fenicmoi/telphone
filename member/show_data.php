@@ -373,6 +373,7 @@ if(!$_SESSION['u_user']){   //ถ้ไม่มีค่า user
                               g_upbyuser = '$u_id'
                         WHERE g_id = $g_id ";
     }
+    echo $sqlUpdate;
 
     $result = dbQuery($sqlUpdate);
 
