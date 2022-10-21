@@ -105,7 +105,7 @@ error_reporting(E_ALL ^ E_NOTICE);
           <a class="nav-link text-white" href="report.php"><i class="fa fa-download" aria-hidden="true"></i> Download ไฟล์ excel</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white" href="#"><i class="fa fa-bullhorn" aria-hidden="true"></i>Update ใหม่</a>
+          <a class="nav-link text-white" href="check-update.php" target="_blank"><i class="fa fa-bullhorn" aria-hidden="true"></i>Update ใหม่</a>
         </li>
         <li class="nav-item">
           <a class="nav-link text-white"  data-toggle="modal" data-target="#modelId"><i class="fa fa-bullhorn" aria-hidden="true"></i> ขอ User & password</a>
