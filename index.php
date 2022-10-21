@@ -105,7 +105,7 @@ error_reporting(E_ALL ^ E_NOTICE);
           <a class="nav-link text-white" href="report.php"><i class="fa fa-download" aria-hidden="true"></i> Download ไฟล์ excel</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white" href="#"><i class="fa fa-bullhorn" aria-hidden="true"></i> รับตำแหน่งใหม่</a>
+          <a class="nav-link text-white" href="#"><i class="fa fa-bullhorn" aria-hidden="true"></i>Update ใหม่</a>
         </li>
         <li class="nav-item">
           <a class="nav-link text-white"  data-toggle="modal" data-target="#modelId"><i class="fa fa-bullhorn" aria-hidden="true"></i> ขอ User & password</a>
@@ -181,44 +181,6 @@ b4-mo
   </div>
 </div>
 
-
-<!-- Modal programmer-->
-<div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">ผู้พัฒนา</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-      </div>
-      <div class="modal-body">
-            <div class="card">
-             <center> <img class="card-img-top" src="images/infinity.jpg" style="width:20%" alt=""></center>
-              <div class="card-body">
-                <p class="card-text">
-                
-                <h4>นายสมศักดิ์  แก้วเกลี้ยง</h4>
-                  <p class="titlecard">นักวิชาการคอมพิวเตอร์ชำนาญการ</p>
-                  <p><i class="fa fa-envelope "></i>:fenicmoi@hotmail.com
-                  <p><i class="fa fa-mobile" aria-hidden="true"></i>: 0-8153-99135</p>
-                  <p><i class="fa fa-line">LINE ID = 0815399135</i>
-                  <img src=" image/line.jpg " sizes="150" class="img-fluid ${3|rounded-top,rounded-right,rounded-bottom,rounded-left,rounded-circle,|}" alt="">
-                  <div style="margin: 24px 0;">
-                    <a href="#"><i class="fa fa-envelope fa-2x"></i></a>
-                    <a href="https://www.facebook.com/fenicmoi"><i class="fa fa-facebook fa-2x"></i></a> 
-                </p>
-              </div>
-            </div>
-
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-
 <!-- Button trigger modal -->
 <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#modelId">
   Launch
@@ -239,7 +201,6 @@ b4-mo
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save</button>
       </div>
     </div>
   </div>

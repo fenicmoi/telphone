@@ -20,19 +20,19 @@ $result = dbQuery($sql);
 $row = dbFetchArray($result);
 $num_row = dbNumRows($result);
 
-if($num_row>0){?>
+if($num_row > 0){?>         
 
 <center>
    <table class="table table-bordered table-hover">
       <tr>
           <td colspan=2>
-            <?php   
+            <?php    //ถ้าไม่ upload รูป
                 $g_pic = $row['g_pic'];
                 if ($g_pic == ''){
                     $g_pic = '../image/pic_head/avatar.png';
                 }
             ?>
-            <center><img class="rounded" width="200" height="250"  src="image/pic_head/<?=$g_pic?>" ></center>
+            <center><img class="rounded" width="200" height="250"  src="image/pic_head/<?php echo $g_pic;?>" ></center>
         </td>
       </tr>
       <tr>
@@ -61,10 +61,10 @@ if($num_row>0){?>
           <td><i class="fa fa-mobile"></i>HOT LINE</td>
           <td><?php echo $row["g_hotline"];?></td>
       </tr>
-      <tr>
+      <!-- <tr>
           <td><i class="fa fa-mobile"></i>ที่อยู่</td>
-          <td><?php echo $row["g_add"];?></td>
-      </tr>
+          <td><?php //echo $row["g_add"];?></td>
+      </tr> -->
       <tr>
           <td><i class="fa fa-mobile"></i>วันที่ Update</td>
           <td><?php echo $row["g_update"];?></td>
@@ -74,7 +74,7 @@ if($num_row>0){?>
    </table>
 </center>
    
-<?}else{
-  ##code
+<?php }else{
+  echo "hellojava";
 }
 ?>
