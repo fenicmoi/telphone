@@ -12,7 +12,9 @@ $dbPass = 'nSSYV5cJ'; // Phatthalun#2019
 $dbName = 'phatthalun_telphone'; 
 */
 
+
 $dbConn=new mysqli($dbHost, $dbUser, $dbPass);
+
 $dbConn->query("set names utf8");
 $dbConn->select_db($dbName);
 	

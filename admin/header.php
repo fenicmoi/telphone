@@ -13,13 +13,14 @@
 				<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 				<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 				<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+		<!-- datatable -->
 				<link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
 				<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 				<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 				<!-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script> -->
 
 
-<!-- bootstrap select -->
+<!-- bootstrap select 2 -->
 <link rel="stylesheet" href="css/bootstrap-select.css">	
 <script src="js/bootstrap-select.js"></script>
 <script type="text/javascript">
@@ -28,7 +29,7 @@
 </script>
 	
 <script>
-
+/* chatbox */
 $(document).ready(function () {         
     $(function(){
 		var current_page_URL = location.href;
