@@ -1,6 +1,7 @@
 <?php
 	session_start(); 
-	$u_user = $_SESSION["u_user"];	
+	$u_user = $_SESSION["u_user"];
+			
 ?>
 <?php include "header.php";?>
 <div class="row">
