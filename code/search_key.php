@@ -51,7 +51,7 @@ if ($type_s == 2) {
 <?php
     }  ?>
     &nbsp<button type="submit" name="Submit" class="btn btn-primary text-white">
-    	<i class="fa fa-search"></i> Let's go
+    	<i class="fa fa-search"></i> ค้นหา
 	</button>
      <input name="hide01" type="hidden" id="hide01" value="recal">	
 </div>	
