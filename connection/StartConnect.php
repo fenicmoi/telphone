@@ -1,18 +1,20 @@
 ﻿<?php
-/*
+
 $dbHost = 'localhost';
 $dbUser = 'root';
-$dbPass = '';
-$dbName = 'publicn_db'; 
-*/
+$dbPass = 'hellojava';
+$dbName = 'phatthalun_telphone'; 
 
+/*
 $dbHost = 'localhost';
 $dbUser = 'phatthalun_dol'; // phatthalun
 $dbPass = 'nSSYV5cJ'; // Phatthalun#2019
 $dbName = 'phatthalun_telphone'; 
+*/
 
 
 $dbConn=new mysqli($dbHost, $dbUser, $dbPass);
+
 $dbConn->query("set names utf8");
 $dbConn->select_db($dbName);
 	
