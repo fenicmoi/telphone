@@ -1,29 +1,36 @@
 ﻿<?php
-/*
+
 $dbHost = 'localhost';
 $dbUser = 'root';
 $dbPass = '';
-$dbName = 'publicn_db'; 
-*/
+$dbName = 'phatthalun_telphone';
 
+
+/*
 $dbHost = 'localhost';
 $dbUser = 'phatthalun_dol'; // phatthalun
 $dbPass = 'nSSYV5cJ'; // Phatthalun#2019
 $dbName = 'phatthalun_telphone';
-
+*/
 
 $dbConn = new mysqli($dbHost, $dbUser, $dbPass);
-$dbConn->query("set names utf8");
-$dbConn->select_db($dbName);
+if ($dbConn->connect_error) {
+        die("Connection failed: " . $dbConn->connect_error);
+}
 
-if (!$dbConn) {
-        die("ไม่สามารถเชื่อมต่อเครื่องแม่ข่ายได้" . mysqli_error());
+$dbConn->query("set names utf8");
+
+if (!$dbConn->select_db($dbName)) {
+        die("Database selection failed: " . $dbConn->error);
 }
 
 function dbQuery($sql)
 {
         global $dbConn;
         $result = $dbConn->query($sql);
+        if ($result === false) {
+                die("Query failed: " . $dbConn->error . "<br>SQL: " . $sql);
+        }
         return $result;
 }
 
@@ -76,8 +83,13 @@ function dbAffectedRows()  //ส่งจำนวนแถวก่อนดำ
 
 function dbFetchArray($result)
 {
-        //return mysql_fetch_array($result, $resultType);
-        global $dbConn;
+        if ($result === false || $result === true) {
+                // This happens if a query failed or was a non-SELECT query
+                // but the caller expected a result set.
+                $debug = debug_backtrace();
+                $caller = $debug[0]['file'] . " on line " . $debug[0]['line'];
+                die("dbFetchArray expects mysqli_result, got " . gettype($result) . ". Called from " . $caller);
+        }
         return mysqli_fetch_array($result);
 }
 
