@@ -16,7 +16,6 @@ include "header.php";
     <?php include("../code/show_user.php"); ?>
     <?php
     if ($u_num > 0) {
-      include("../code/user_pwd_del.php");
       include("../code/show_user_all.php");
     } else {
       echo "nodata";
