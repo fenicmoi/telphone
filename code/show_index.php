@@ -1,6 +1,8 @@
 <?php
-
-if ($type_s == 2) {
+// Handle the new modern hero search or fallback to legacy views
+if (isset($_POST['txtSearch']) || isset($_POST['btnSearch'])) {
+    include 'show_modern.php';
+} elseif ($type_s == 2) {
     include 'show_index2.php';
 } elseif ($type_s == 3) {
     include 'show_index3.php';
