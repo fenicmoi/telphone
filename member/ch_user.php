@@ -1,7 +1,9 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
 <?php
 include './header.php';
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+	session_start();
+}
 $u_user = $_POST['u_user'];
 $u_pass = $_POST['u_pass'];
 
@@ -29,6 +31,7 @@ if ($u_num == 1) {
 
 	$_SESSION['u_user'] = $u_user;    //ตัวแปรใช้เช็คการเข้าสู่ระบบ
 	$_SESSION['u_id'] = $u_id;
+	$_SESSION['u_type'] = $u_type;
 	$_SESSION['dep_id'] = $u_dep_id;   //ลงทะเบียนตัวแปร session 
 
 
