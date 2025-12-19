@@ -5,7 +5,6 @@ $dbUser = 'root';
 $dbPass = '';
 $dbName = 'phatthalun_telphone';
 
-
 /*
 $dbHost = 'localhost';
 $dbUser = 'phatthalun_dol'; // phatthalun
