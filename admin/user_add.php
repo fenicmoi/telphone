@@ -154,14 +154,19 @@ include "header.php";
 <?php include "footer.php"; ?>
 
 <?php  ############ RESET ##############
-if (isset($_GET['u_id'])) {
-  $u_id = $_GET['u_id'];
+if (isset($_GET['reset_id'])) {
+  $reset_id = $_GET['reset_id'];
   $sql = "UPDATE user SET u_pass = 'logon' WHERE u_id = ?";
-  $result = dbQueryPrepared($sql, [$u_id]);
+  $result = dbQueryPrepared($sql, [$reset_id]);
   if ($result) {
-    echo "<script>swal('เรียบร้อย!','รีเซทรหัสผ่านเป็น logon แล้ว','success');</script>";
+    echo "<script>
+      swal('เรียบร้อย!', 'รีเซทรหัสผ่านเป็น logon แล้ว', 'success')
+      .then(() => {
+        window.location.href='user_add.php';
+      });
+    </script>";
   } else {
-    echo "<script>swal('ไม่สำเร็จ!','มีบางอย่างผิดพลาด','error');</script>";
+    echo "<script>swal('ไม่สำเร็จ!', 'มีบางอย่างผิดพลาด', 'error');</script>";
   }
 }
 ?>
@@ -264,17 +269,13 @@ if (isset($_POST['btnEdit'])) {
   $u_name = $_POST['u_name'];
   $u_last = $_POST['u_last'];
 
-  $sql = "UPDATE user SET 
-                          u_type= ?,
-                          u_user= ?,
-                          u_pass= ?,
-                          u_prefix= ?,
-                          u_name= ?,
-                          u_last= ?,
-                          u_dep_id= ?
-                      WHERE
-                          u_id= ?";
-  $result = dbQueryPrepared($sql, [$u_type, $u_user, $u_pass, $u_prefix, $u_name, $u_last, $u_dep_id, $u_id]);
+  if (!empty($u_pass)) {
+    $sql = "UPDATE user SET u_type=?, u_user=?, u_pass=?, u_prefix=?, u_name=?, u_last=?, u_dep_id=? WHERE u_id=?";
+    $result = dbQueryPrepared($sql, [$u_type, $u_user, $u_pass, $u_prefix, $u_name, $u_last, $u_dep_id, $u_id]);
+  } else {
+    $sql = "UPDATE user SET u_type=?, u_user=?, u_prefix=?, u_name=?, u_last=?, u_dep_id=? WHERE u_id=?";
+    $result = dbQueryPrepared($sql, [$u_type, $u_user, $u_prefix, $u_name, $u_last, $u_dep_id, $u_id]);
+  }
   if ($result) {
     echo "<script>
             swal({
@@ -345,7 +346,6 @@ if (isset($_POST['btnEdit'])) {
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save</button>
       </div>
     </div>
   </div>

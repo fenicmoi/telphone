@@ -33,8 +33,8 @@ $dep_id = $row["u_dep_id"];
                     $result_dep = dbQuery($sql_dep);
                     while ($row_dep = dbFetchArray($result_dep)) { ?>
                         <option value="<?php echo $row_dep['dep_id']; ?>" <?php if ($dep_id == $row_dep['dep_id']) {
-                              echo "selected";
-                          } ?>>
+                               echo "selected";
+                           } ?>>
                             <?php echo $row_dep['dep_name']; ?>
                         </option>
                     <?php } ?>
@@ -63,7 +63,8 @@ $dep_id = $row["u_dep_id"];
             <div class="input-group-prepend">
                 <span class="input-group-text">Password</span>
             </div>
-            <input type="text" name="u_pass" id="u_pass" class="form-control" value="<?php echo $row['u_pass']; ?>">
+            <input type="password" name="u_pass" id="u_pass" class="form-control" value=""
+                placeholder="เว้นว่างไว้เพื่อคงรหัสเดิม">
         </div>
         <br>
         <div class="input-group">
@@ -77,8 +78,8 @@ $dep_id = $row["u_dep_id"];
                 $result = dbQuery($sql);
                 while ($row_prefix = dbFetchArray($result)) { ?>
                     <option value="<?php echo $row_prefix['pre_id']; ?>" <?php if ($pre_id == $row_prefix['pre_id']) {
-                          echo "selected";
-                      } ?>>
+                           echo "selected";
+                       } ?>>
                         <?php echo $row_prefix['pre_name']; ?>
                     </option>
                 <?php } ?>
@@ -86,13 +87,15 @@ $dep_id = $row["u_dep_id"];
 
             <div class="input-group-prepend">
                 <span class="input-group-text">ชื่อ</span>
-                <input type="text" id="u_name" name="u_name" class="form-control" value="<?php print $row['u_name']; ?>">
+                <input type="text" id="u_name" name="u_name" class="form-control"
+                    value="<?php print $row['u_name']; ?>">
             </div>
 
 
             <div class="input-group-prepend">
                 <span class="input-group-text">นามสกุล</span>
-                <input type="text" id="u_last" name="u_last" class="form-control" value="<?php print $row['u_last']; ?>">
+                <input type="text" id="u_last" name="u_last" class="form-control"
+                    value="<?php print $row['u_last']; ?>">
             </div>
         </div>
     </div> <!-- form-group -->
