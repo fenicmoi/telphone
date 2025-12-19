@@ -1,8 +1,9 @@
 <?php
 $txtSearch = isset($_POST['txtSearch']) ? $_POST['txtSearch'] : '';
+$selMinis = isset($_POST['selMinis']) ? $_POST['selMinis'] : '';
 
-if (empty($txtSearch)) {
-    echo '<div class="alert alert-info">กรุณากรอกคำค้นหาเพื่อเริ่มต้น</div>';
+if (empty($txtSearch) && empty($selMinis)) {
+    echo '<div class="alert alert-info">กรุณากรอกคำค้นหาหรือเลือกหมวดหมู่เพื่อเริ่มต้น</div>';
     return;
 }
 
@@ -11,14 +12,21 @@ $sql = "SELECT g.*, d.dep_name, m.m_name
         FROM govern g
         LEFT JOIN depart d ON g.g_dep = d.dep_id
         LEFT JOIN ministry m ON d.dep_minis = m.m_id
-        WHERE g.g_head_th LIKE ? 
+        WHERE (g.g_head_th LIKE ? 
            OR g.g_position LIKE ? 
            OR d.dep_name LIKE ? 
-           OR m.m_name LIKE ?
-        ORDER BY g.g_impo ASC";
+           OR m.m_name LIKE ?)";
 
-$searchTerm = "%" . $txtSearch . "%";
-$result = dbQueryPrepared($sql, [$searchTerm, $searchTerm, $searchTerm, $searchTerm]);
+$params = ["%" . $txtSearch . "%", "%" . $txtSearch . "%", "%" . $txtSearch . "%", "%" . $txtSearch . "%"];
+
+if (!empty($selMinis)) {
+    $sql .= " AND m.m_id = ?";
+    $params[] = $selMinis;
+}
+
+$sql .= " ORDER BY g.g_impo ASC";
+
+$result = dbQueryPrepared($sql, $params);
 $num = dbNumRows($result);
 
 echo '<div class="row animate-fade-in">';

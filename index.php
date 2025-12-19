@@ -144,9 +144,19 @@ error_reporting(E_ALL ^ E_NOTICE);
       <p class="lead mb-5">จังหวัดพัทลุง (ptl-contact)</p>
 
       <form name="search_data" method="post" action="#" class="search-container-modern">
+        <select name="selMinis" class="search-select-modern d-none d-md-block">
+          <option value="">ทุกหมวดหมู่</option>
+          <?php
+          $m_sql = "SELECT m_id, m_name FROM ministry ORDER BY m_impo ASC";
+          $m_res = dbQuery($m_sql);
+          while ($m_row = dbFetchAssoc($m_res)) {
+            echo '<option value="' . $m_row['m_id'] . '">' . $m_row['m_name'] . '</option>';
+          }
+          ?>
+        </select>
         <i class="fa fa-search ml-3 text-muted"></i>
         <input type="text" name="txtSearch" class="search-input-modern"
-          placeholder="ค้นหาชื่อ, ตำแหน่ง หรือหน่วยงาน (เช่น ผู้ว่า...)" required>
+          placeholder="ค้นหาชื่อ, ตำแหน่ง หรือหน่วยงาน...">
         <button type="submit" name="btnSearch" class="search-btn-modern">ค้นหาเลย</button>
       </form>
     </div>
