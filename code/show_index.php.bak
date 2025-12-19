@@ -1,0 +1,9 @@
+<?
+if ($type_s==1)					{		include ("show_index2.php");		}
+else if ($type_s==3)			{		include ("show_index3.php");		}
+else if ($type_s==4)			{		include ("show_index3.php");		}
+else if ($type_s==5)			{		include ("show_index3.php");		}
+else if ($type_s==6)			{		include ("show_index3.php");		}
+else if ($type_s==7)			{		include ("show_index3.php");		}
+else										{		include ("show_index1.php");		 }
+?>

