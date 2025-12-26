@@ -23,10 +23,12 @@ $(document).ready(function() {
 	<tbody>
 <?php
 
+$ser = isset($_GET['ser']) ? $_GET['ser'] : 'u';
+$order_by = ($ser == 'd') ? 'res_dep' : 'res_user';
 	
-	$re_sql="SELECT * FROM respon  ORDER BY res_user ";			
+$re_sql="SELECT * FROM respon  ORDER BY $order_by ";			
 
-	$i=1;
+$i=1;
 	$re_result=dbQuery($re_sql);
 	$re_num=dbNumRows($re_result);
 		if ($re_num>0){
@@ -95,7 +97,9 @@ $(document).ready(function() {
 
 									$i=$i+1;
 				} //while
-		}//if
+		} else {
+			echo '<tr><td colspan="5" class="text-center">ไม่มีข้อมูลสิทธิ์การกำหนด</td></tr>';
+		} //if
 ?>
 </tbody>
 </table>

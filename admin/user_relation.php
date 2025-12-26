@@ -35,7 +35,7 @@
                         <span class="input-group-text">admin หน่วนงาน</span>
                       </div>
                       <!-- <select class="form-control" name="u_name"> -->
-                      <select class=" selectpicker form-control" data-live-search="true" title="โปรดระบุ" name="u_name"" id="u_name">
+                      <select class=" selectpicker form-control" data-live-search="true" title="โปรดระบุ" name="u_name" id="u_name">
                          <?php include ("../code/list_user.php");?>
                       </select>
                   </div>
@@ -70,7 +70,22 @@
 <div class="row">
     <div class="col-md-12">
         <div class="card">
-            <div class="card-header text-white bg-secondary">ข้อมูลการกำหนดสิทธิ์</div>
+            <div class="card-header text-white bg-secondary">ข้อมูลการกำหนดสิทธิ์
+                <div class="float-right">
+                    <form method="get" class="form-inline">
+                        <label class="mr-2">เรียงตาม:</label>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="ser" id="ser_u" value="u" <?php if (!isset($_GET['ser']) || $_GET['ser'] == 'u') echo 'checked'; ?>>
+                            <label class="form-check-label" for="ser_u">User</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="ser" id="ser_d" value="d" <?php if (isset($_GET['ser']) && $_GET['ser'] == 'd') echo 'checked'; ?>>
+                            <label class="form-check-label" for="ser_d">หน่วยงาน</label>
+                        </div>
+                        <button type="submit" class="btn btn-light btn-sm ml-2">ตกลง</button>
+                    </form>
+                </div>
+            </div>
             <div class="card-body">
                 <?php 
                    	if (@$hide04=='recal'){
