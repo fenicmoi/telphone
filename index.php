@@ -127,7 +127,7 @@ error_reporting(E_ALL ^ E_NOTICE);
             <a class="nav-link" href="report.php"><i class="fa fa-file-excel-o"></i> ไฟล์ excel</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="contacts.vcf"><i class="fa fa-address-book-o"></i> ไฟล์ vcf</a>
+            <a class="nav-link" href="export_vcf.php"><i class="fa fa-address-book-o"></i> ไฟล์ vcf</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#" data-toggle="modal" data-target="#modalLogin"><i class="fa fa-lock"></i>
