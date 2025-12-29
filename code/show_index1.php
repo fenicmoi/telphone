@@ -33,8 +33,8 @@ $s_name = $s_row['m_name'];
         <td><B> โทรศัพท์</B></td>
 
         <td><B> มือถือ</B></td>
-        <td><B> ช่องทางอิเล็กทรอนิกส์สำหรับประชาชน</B></td>
-        <td><b>Update</b></td>
+        <td class="d-none d-md-table-cell"><B> ช่องทางอิเล็กทรอนิกส์สำหรับประชาชน</B></td>
+        <td class="d-none d-md-table-cell"><b>Update</b></td>
       </tr>
       <?php
       $g_sql = "SELECT * FROM govern WHERE  g_dep='$dep_id'  ORDER BY g_impo ASC";
@@ -74,10 +74,10 @@ $s_name = $s_row['m_name'];
             <td>
               <div align=left><?php echo setformat($g_mobile) ?> </div>
             </td>
-            <td>
+            <td class="d-none d-md-table-cell">
               <div align=left><?php echo $g_web ?><BR><?php echo $g_email ?></div>
             </td>
-            <td>
+            <td class="d-none d-md-table-cell">
               <div align=left><?php echo $g_update ?></div>
             </td>
           </tr>
