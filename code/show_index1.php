@@ -72,7 +72,11 @@ $s_name = $s_row['m_name'];
             </td>
 
             <td>
-              <div align=left><?php echo setformat($g_mobile) ?> </div>
+              <div align=left>
+                <a href="tel:<?php echo $g_mobile; ?>" style="color: inherit; text-decoration: none;">
+                  <?php echo setformat($g_mobile) ?>
+                </a>
+              </div>
             </td>
             <td class="d-none d-md-table-cell">
               <div align=left><?php echo $g_web ?><BR><?php echo $g_email ?></div>
