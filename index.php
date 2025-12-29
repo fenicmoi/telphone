@@ -162,29 +162,7 @@ error_reporting(E_ALL ^ E_NOTICE);
     </div>
   </div>
 
-  <div class="row mt-4">
-    <div class="col-12 text-center">
-      <h5 class="text-muted mb-3 font-weight-bold">หรือเลือกชมตามสังกัด</h5>
-      <div class="d-flex flex-wrap justify-content-center gap-2">
-        <?php
-        $q_sql = "SELECT * FROM ministry ORDER BY m_impo ASC LIMIT 10";
-        $q_res = dbQuery($q_sql);
-        while ($q_row = dbFetchAssoc($q_res)) {
-          echo '<form method="post" action="index.php" class="m-1">';
-          echo '<input type="hidden" name="txtSearch" value="' . $q_row['m_name'] . '">';
-          echo '<button type="submit" class="btn btn-outline-primary shadow-sm px-3" style="border-radius: 20px; font-weight: 500;">';
-          echo '<i class="fa fa-university mr-1"></i> ' . $q_row['m_name'];
-          echo '</button>';
-          echo '</form>';
-        }
-        ?>
-        <a href="report.php" class="btn btn-outline-success shadow-sm px-3 m-1"
-          style="border-radius: 20px; font-weight: 500;">
-          <i class="fa fa-file-excel-o mr-1"></i> ดูทั้งหมด (Excel)
-        </a>
-      </div>
-    </div>
-  </div>
+
 
   <div class="row mt-5">
     <div class="col-md-12">
