@@ -1,5 +1,7 @@
 <?php
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 if (!isset($_SESSION['u_user']) || $_SESSION['u_type'] !== 'a') {
     exit('Unauthorized');
 }
