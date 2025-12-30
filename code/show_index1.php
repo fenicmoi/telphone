@@ -19,8 +19,8 @@ $s_name = $s_row['m_name'];
     </td>
   </tr>
   <?php
-  $d_sql = "SELECT * FROM depart WHERE  dep_minis='$minis' ORDER BY dep_impo ASC";
-  $d_result = dbQuery($d_sql);
+  $d_sql = "SELECT * FROM depart WHERE dep_minis = ? ORDER BY dep_impo ASC";
+  $d_result = dbQueryPrepared($d_sql, [$minis]);
   $d_num = dbNumRows($d_result);
   if ($d_num > 0) {
     while ($d_row = dbFetchArray($d_result)) {
@@ -38,8 +38,8 @@ $s_name = $s_row['m_name'];
         <td class="d-none d-md-table-cell"><b>Update</b></td>
       </tr>
       <?php
-      $g_sql = "SELECT * FROM govern WHERE  g_dep='$dep_id'  ORDER BY g_impo ASC";
-      $g_result = dbQuery($g_sql);
+      $g_sql = "SELECT * FROM govern WHERE g_dep = ? ORDER BY g_impo ASC";
+      $g_result = dbQueryPrepared($g_sql, [$dep_id]);
       $g_num = dbNumRows($g_result);
       if ($g_num > 0) {
         while ($g_row = dbFetchArray($g_result)) {

@@ -1,26 +1,17 @@
 <?php
-	//header('Content-Type: application/json');
+//header('Content-Type: application/json');
 
-	@$res_id=$_GET['res_id'];
-	$sql=" DELETE FROM respon WHERE res_id=$res_id";
+@$res_id = $_GET['res_id'];
 
-	if($res_id<>''){
-		echo "<script>console.log('$res_id');</script>";
-	}else{
-		echo "<script>console.log('no data');</script>";
-	}
+$sql = " DELETE FROM respon WHERE res_id=?";
+$query = dbQueryPrepared($sql, [$res_id]);
+if ($query) {
+	echo json_encode(array('status' => '1', 'message' => 'บันทึกข้อมูลแล้ว'));
+	echo "<script>console.log('yes');</script>";
+} else {
+	echo json_encode(array('status' => '0', 'message' => 'มีบางอย่างผิดพลาด!'));
+	echo "<script>console.log('error');</script>";
+}
 
-
-	
-	$query = dbQuery($sql);
-	if($query) {
-		echo json_encode(array('status' => '1','message'=> 'บันทึกข้อมูลแล้ว'));
-		echo "<script>console.log('yes');</script>";
-	}else{
-		echo json_encode(array('status' => '0','message'=> 'มีบางอย่างผิดพลาด!'));
-		echo "<script>console.log('error');</script>";
-	}
-	
 
 ?>
-
