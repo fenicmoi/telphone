@@ -66,12 +66,16 @@ include "header.php";
               <div class="input-group-prepend">
                 <span class="input-group-text">Username</span>
               </div>
-              <input type="text" name="u_user" id="u_user" class="form-control">
+              <input type="text" name="u_user" id="u_user" class="form-control" autocomplete="off">
 
               <div class="input-group-prepend">
                 <span class="input-group-text">Password</span>
               </div>
               <input type="text" name="u_pass" id="u_pass" class="form-control">
+            </div>
+            <div id="user_check_msg"
+              style="color: red; font-size: 0.9em; margin-top: 5px; display: none; margin-left: 5px;">
+              <i class="fas fa-exclamation-circle"></i> ชื่อผู้ใช้นี้มีในระบบแล้ว
             </div>
             <br>
             <div class="input-group">
@@ -362,4 +366,31 @@ if (isset($_POST['btnEdit'])) {
     $('#divDataview').load('show_user_edit.php', sdata);
   }
 
+  $(document).ready(function () {
+    $('#u_user').on('keyup change', function () {
+      var u_user = $(this).val();
+      if (u_user.length > 0) {
+        $.ajax({
+          url: 'check_user_duplicate.php',
+          method: 'POST',
+          data: { u_user: u_user },
+          success: function (data) {
+            if (data.exists) {
+              $('#user_check_msg').show();
+              $('#btnInsert').prop('disabled', true);
+            } else {
+              $('#user_check_msg').hide();
+              $('#btnInsert').prop('disabled', false);
+            }
+          },
+          error: function () {
+            console.error("Error checking duplicate username");
+          }
+        });
+      } else {
+        $('#user_check_msg').hide();
+        $('#btnInsert').prop('disabled', false);
+      }
+    });
+  });
 </script>
