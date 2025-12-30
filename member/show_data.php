@@ -77,11 +77,11 @@ $resultDep = dbQueryPrepared($sqlDep, [$u_user]);
         <td><?= $row['g_email'] ?></td>
         <td><?= $row['g_update'] ?></td>
         <td>
-          <a href="#" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modalEdit"
-            onclick="load_edit('<?php echo $row['g_id']; ?>');">
+          <a href="javascript:void(0);" class="btn btn-warning btn-sm"
+            onclick="confirmEdit(() => { load_edit('<?php echo $row['g_id']; ?>'); $('#modalEdit').modal('show'); });">
             <i class="fas fa-edit"></i>
           </a>
-          <a href="#" class="btn btn-danger btn-sm" onclick="load_remove('<?php echo $row['g_id']; ?>');">
+          <a href="javascript:void(0);" class="btn btn-danger btn-sm" onclick="load_remove('<?php echo $row['g_id']; ?>');">
             <i class="fas fa-trash-alt"></i>
           </a>
         </td>
@@ -197,29 +197,29 @@ $resultDep = dbQueryPrepared($sqlDep, [$u_user]);
     if ($_FILES["g_pic"]["size"] >= 600000) {
       $uploadOk = 0;
       echo "<script>
-                      swal({
-                                title: 'ภาพมีขนาดใหญ่เกินไป!',
-                                text: 'ไฟล์ภาพต้องมีขนาดไม่เกิน 500 KB เท่านั้น!',
-                                icon: 'warning',
-                                button: 'ตกลง!',
-                              }).then(function(){
-                                  window.location = 'show_data.php';
-                              });
-                    </script>";
+      Swal.fire({
+        title: 'ภาพมีขนาดใหญ่เกินไป!',
+        text: 'ไฟล์ภาพต้องมีขนาดไม่เกิน 500 KB เท่านั้น!',
+        icon: 'warning',
+        confirmButtonText: 'ตกลง',
+      }).then(function() {
+        window.location = 'show_data.php';
+      });
+      </script>";
     }
 
     if ($imageFileType != "jpg" && $imageFileType != "jpeg" && $imageFileType != "png" && $imageFileType != "gif") {
       $uploadOk = 0;
       echo "<script>
-                    swal({
-                              title: 'ผิดพลาด!',
-                              text: 'อนุญาตเฉพาะไฟล์นามสกุล jpg,jpeg,png หรือ gif เท่านั้น!',
-                              icon: 'error',
-                              button: 'ตกลง!',
-                            }).then(function(){
-                                window.location = 'show_data.php';
-                            });
-                  </script>";
+      Swal.fire({
+        title: 'ผิดพลาด!',
+        text: 'อนุญาตเฉพาะไฟล์นามสกุล jpg,jpeg,png หรือ gif เท่านั้น!',
+        icon: 'error',
+        confirmButtonText: 'ตกลง',
+      }).then(function() {
+        window.location = 'show_data.php';
+      });
+      </script>";
     } //file type
   
     if ($uploadOk == 1) {
@@ -237,26 +237,26 @@ $resultDep = dbQueryPrepared($sqlDep, [$u_user]);
     $result = dbQueryPrepared($sqlInsert, [$g_dep, $g_impo, $g_head_th, $g_position, $g_add, $g_phone, $g_hotline, $g_fax, $g_mobile, $g_email, $newname, $g_update, $u_id]);
     if ($result) {
       echo "<script>
-                        swal({
-                                title: 'สำเร็จ!',
-                                text: 'บันทึกข้อมูลแล้ว!',
-                                icon: 'success',
-                                button: 'ตกลง'
-                            }).then(function() {
-                                window.location = 'show_data.php';
-                            });
-                      </script>";
+      Swal.fire({
+        title: 'สำเร็จ!',
+        text: 'บันทึกข้อมูลแล้ว!',
+        icon: 'success',
+        confirmButtonText: 'ตกลง'
+      }).then(function() {
+        window.location = 'show_data.php';
+      });
+      </script>";
     } else {
       echo "<script>
-                swal({
-                          title: 'ผิดพลาด!',
-                          text: 'มีบางอย่างผิดพลาด!',
-                          icon: 'error',
-                          button: 'ตกลง!',
-                        }).then(function(){
-                            window.location = 'show_data.php';
-                        });
-                        </script>";
+      Swal.fire({
+        title: 'ผิดพลาด!',
+        text: 'มีบางอย่างผิดพลาด!',
+        icon: 'error',
+        confirmButtonText: 'ตกลง',
+      }).then(function() {
+        window.location = 'show_data.php';
+      });
+      </script>";
     } //check result
   
   }  //check btn save
@@ -293,30 +293,30 @@ $resultDep = dbQueryPrepared($sqlDep, [$u_user]);
       if ($_FILES["g_pic"]["size"] >= 6000000) {
         $uploadOk = 0;
         echo "<script>
-                      swal({
-                                title: 'ภาพมีขนาดใหญ่เกินไป!',
-                                text: 'ไฟล์ภาพต้องมีขนาดไม่เกิน 500 KB เท่านั้น!',
-                                icon: 'warning',
-                                button: 'ตกลง!',
-                              }).then(function(){
-                                  window.location = 'show_data.php';
-                              });
-                    </script>";
+        Swal.fire({
+          title: 'ภาพมีขนาดใหญ่เกินไป!',
+          text: 'ไฟล์ภาพต้องมีขนาดไม่เกิน 500 KB เท่านั้น!',
+          icon: 'warning',
+          confirmButtonText: 'ตกลง',
+        }).then(function() {
+          window.location = 'show_data.php';
+        });
+        </script>";
       }
 
 
       if ($imageFileType != "jpg" && $imageFileType != "jpeg" && $imageFileType != "png" && $imageFileType != "gif") {
         $uploadOk = 0;
         echo "<script>
-                    swal({
-                              title: 'ผิดพลาด!',
-                              text: 'อนุญาตเฉพาะไฟล์นามสกุล jpg,jpeg,png หรือ gif เท่านั้น!',
-                              icon: 'error',
-                              button: 'ตกลง!',
-                            }).then(function(){
-                                window.location = 'show_data.php';
-                            });
-                  </script>";
+        Swal.fire({
+          title: 'ผิดพลาด!',
+          text: 'อนุญาตเฉพาะไฟล์นามสกุล jpg,jpeg,png หรือ gif เท่านั้น!',
+          icon: 'error',
+          confirmButtonText: 'ตกลง',
+        }).then(function() {
+          window.location = 'show_data.php';
+        });
+        </script>";
       } //file tpe
   
       if ($uploadOk == 1) {
@@ -366,26 +366,26 @@ $resultDep = dbQueryPrepared($sqlDep, [$u_user]);
 
     if ($result) {
       echo "<script>
-                        swal({
-                                title: 'สำเร็จ!',
-                                text: 'แก้ไขข้อมูลแล้ว!',
-                                icon: 'success',
-                                button: 'ตกลง'
-                            }).then(function() {
-                                window.location.href = 'show_data.php';
-                            });
-                      </script>";
+      Swal.fire({
+        title: 'สำเร็จ!',
+        text: 'แก้ไขข้อมูลแล้ว!',
+        icon: 'success',
+        confirmButtonText: 'ตกลง'
+      }).then(function() {
+        window.location.href = 'show_data.php';
+      });
+      </script>";
     } else {
       echo "<script>
-                swal({
-                          title: 'ผิดพลาด!',
-                          text: 'มีบางอย่างผิดพลาด!',
-                          icon: 'error',
-                          button: 'ตกลง!',
-                        }).then(function(){
-                            window.location.href = 'show_data.php';
-                        });
-                        </script>";
+      Swal.fire({
+        title: 'ผิดพลาด!',
+        text: 'มีบางอย่างผิดพลาด!',
+        icon: 'error',
+        confirmButtonText: 'ตกลง',
+      }).then(function() {
+        window.location.href = 'show_data.php';
+      });
+      </script>";
     }
 
   }
@@ -467,39 +467,39 @@ $resultDep = dbQueryPrepared($sqlDep, [$u_user]);
 
 
     function load_remove(g_id) {
-      var sdata = { g_id: g_id }
+      var sdata = {
+        g_id: g_id
+      };
 
-      swal({
+      Swal.fire({
         title: 'กำลังจะลบข้อมูล?',
         text: 'คุณแน่ใจนะ!',
         icon: 'warning',
-        buttons: true,
-        dangerMode: true,
-      })
-        .then((willDelete) => {
-          if (willDelete) {  // ถ้ากดปุ่ม ok  
-
-            $.ajax({
-              type: "POST",
-              url: "del_user.php",
-              data: sdata,
-              success: function (result) {
-                if (result.success == 1) {
-                  setTimeout("location.href = 'show_data.php'", 1500);
-                  swal("Good job!", "ลบข้อมูลเรียบร้อยแล้ว!", "success");
-                } else {
-                  setTimeout("location.href = 'show_data.php'", 1500);
-                  swal("Error!", "มีบางอย่างผิดปกติ!", "error");
-                }
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'ตกลง',
+        cancelButtonText: 'ยกเลิก'
+      }).then((result) => {
+        if (result.value) { // ถ้ากดปุ่ม ok  
+          $.ajax({
+            type: "POST",
+            url: "del_user.php",
+            data: sdata,
+            success: function (result) {
+              if (result.success == 1) {
+                Swal.fire("สำเร็จ!", "ลบข้อมูลเรียบร้อยแล้ว!", "success").then(() => {
+                  location.href = 'show_data.php';
+                });
+              } else {
+                Swal.fire("Error!", "มีบางอย่างผิดปกติ!", "error").then(() => {
+                  location.href = 'show_data.php';
+                });
               }
-            });
-
-          } else {    //ถ้ากดปุ่ม ื no
-            swal('OK');
-          }
-
-        });  //swal
-
+            }
+          });
+        }
+      }); //swal
     }
 
   </script>

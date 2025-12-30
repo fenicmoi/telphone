@@ -27,16 +27,16 @@ if (!isset($_SESSION['u_user']) || $_SESSION['u_type'] !== 'a') {
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
 		integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 	<link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+	<!-- <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script> -->
 	<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-	<!-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script> -->
-
-
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<script src="../js/confirm.js"></script>
 	<!-- bootstrap select -->
 	<link rel="stylesheet" href="css/bootstrap-select.css">
 	<script src="js/bootstrap-select.js"></script>
 	<script type="text/javascript">
-		$('.selectpicker').selectpicker({
+		$(document).ready(function () {
+			$('.selectpicker').selectpicker({});
 		});
 	</script>
 
@@ -87,6 +87,8 @@ if (!isset($_SESSION['u_user']) || $_SESSION['u_type'] !== 'a') {
 			<a class="navbar-brand" href="#">สมุดโทรศัพท์จังหวัดพัทลุง</a>
 		</div>
 		<ul class="navbar-nav">
+			<li class="nav-item"><a class="nav-link" href="dashboard.php"><i class="fas fa-tachometer-alt"></i>
+					Deskboard</a></li>
 			<li class="active nav-item"><a class="nav-link" href="minis_add.php"><i class="fas fa-building"></i>
 					สังกัด</a></li>
 			<li class="nav-item"><a class="nav-link" href="dep_add.php"><i class="fas fa-landmark"></i> หน่วยงาน</a>

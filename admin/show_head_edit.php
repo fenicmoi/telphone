@@ -12,11 +12,6 @@ $sql = "SELECT * FROM govern WHERE g_id = ?";
 $result = dbQueryPrepared($sql, [$g_id]);
 $row = dbFetchAssoc($result);
 ?>
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-
-<!-- bootstrap select -->
-<link rel="stylesheet" href="css/bootstrap-select.css">
-<script src="js/bootstrap-select.js"></script>
 <script type="text/javascript">
   $('.selectpicker').selectpicker({});
 </script>

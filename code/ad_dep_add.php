@@ -1,45 +1,44 @@
 <?php
-if(isset($_POST["btnInsert"])){
-		$dep_minis = $_POST["selMinis"];
-		$dep_name = $_POST["d_name"];
-		$dep_impo = $_POST["d_impo"];
+if (isset($_POST["btnInsert"])) {
+	$dep_minis = $_POST["selMinis"];
+	$dep_name = $_POST["d_name"];
+	$dep_impo = $_POST["d_impo"];
 
-		$chd_sql="SELECT * FROM depart  WHERE  dep_name='$dep_name'  ";
-		echo "<script>console.log('$chd_sql');</script>";
-		$chd_num=dbNumRows(dbQuery($chd_sql));
-			if ($chd_num>0){
-				echo "<script>
-						swal({
+	$chd_sql = "SELECT * FROM depart WHERE dep_name = ?";
+	$chd_res = dbQueryPrepared($chd_sql, [$dep_name]);
+	$chd_num = dbNumRows($chd_res);
+	if ($chd_num > 0) {
+		echo "<script>
+						Swal.fire({
 							title: 'ข้อมูลซ้ำ!',
 							text: 'ระบบมีชื่อหน่วยงานนี้แล้ว!',
 							icon: 'error',
-							button: 'ok',
+							confirmButtonText: 'ok',
 						});
 					</script>";
-			}else{
-					$add_sql="INSERT INTO depart(dep_minis,dep_impo,dep_name) 
-							  VALUES ('$dep_minis','$dep_impo','$dep_name')";
-					$add_result1=dbQuery($add_sql);
-					if($add_result1){
-						echo "<script>
-						swal({
+	} else {
+		$add_sql = "INSERT INTO depart(dep_minis,dep_impo,dep_name) VALUES (?, ?, ?)";
+		$add_result1 = dbQueryPrepared($add_sql, [$dep_minis, $dep_impo, $dep_name]);
+		if ($add_result1) {
+			echo "<script>
+						Swal.fire({
 							title: 'สำเร็จ!',
 							text: 'บันทึกข้อมูลเรียบร้อยแล้ว',
 							icon: 'success',
-							button: 'ok',
-						});
+							confirmButtonText: 'ok',
+						}).then(() => { window.location.href='dep_add.php'; });
 					</script>";
-					}else{
-						echo "<script>
-							swal({
+		} else {
+			echo "<script>
+							Swal.fire({
 								title: 'ผิดพลาด!',
-								text: 'บันทึกข้อมูลไม่สำเร็๗!',
+								text: 'บันทึกข้อมูลไม่สำเร็จ!',
 								icon: 'error',
-								button: 'ok!',
+								confirmButtonText: 'ok!',
 							});
 						</script>";
-					}//check fquery
-			}//check data
+		}//check fquery
+	}//check data
 }//btnSearch
 
 ?>

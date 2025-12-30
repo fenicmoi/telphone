@@ -29,16 +29,17 @@
 					echo $ua_row["u_name"]; ?>&nbsp;&nbsp;<?php echo $ua_row["u_last"]; ?>
 					</td>
 					<td><?php echo $ua_row["dep_name"]; ?></td>
-					<td><a href="?reset_id=<?php echo $ua_row['u_id']; ?>" class="btn btn-info btn-sm"><i class="fas fa-cog"></i>
+					<td><a href="javascript:void(0);" onclick="confirmReset('?reset_id=<?php echo $ua_row['u_id']; ?>')"
+							class="btn btn-info btn-sm"><i class="fas fa-cog"></i>
 							reset</a></td>
 					<td>
-						<a class="btn btn-warning btn-sm" href="#" onclick="load_edit('<?php echo $ua_row['u_id']; ?>');"
-							data-toggle="modal" data-target="#modalEdit">
+						<a class="btn btn-warning btn-sm" href="javascript:void(0);"
+							onclick="confirmEdit(() => { load_edit('<?php echo $ua_row['u_id']; ?>'); $('#modalEdit').modal('show'); });">
 							<i class="fas fa-pencil-alt"></i> แก้ไข
 						</a>
 					</td>
-					<td><a href="?del_id=<?php echo $ua_row['u_id']; ?>" class="btn btn-danger btn-sm"><i
-								class="fas fa-trash-alt"></i> ลบ</a></td>
+					<td><a href="javascript:void(0);" onclick="confirmDelete('?del_id=<?php echo $ua_row['u_id']; ?>')"
+							class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i> ลบ</a></td>
 				</tr>
 				<?php
 				$i = $i + 1;

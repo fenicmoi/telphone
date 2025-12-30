@@ -1,17 +1,15 @@
-
 <script>
-function load_data(res_id){
-	var res_id = res_id;
-	$('#divDataview').load('./edit_relation.php?res_id='+res_id)
-}
+	function load_data(res_id) {
+		var res_id = res_id;
+		$('#divDataview').load('./edit_relation.php?res_id=' + res_id)
+	}
 
 
-$(document).ready(function() {
-    $('#user').DataTable();
-} );
+	$(document).ready(function () {
+		$('#user').DataTable();
+	});
 
 </script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
 <table class="table table-bordered table-hover" id="user">
 	<thead>
 		<th>ลำดับ</th>
@@ -21,116 +19,127 @@ $(document).ready(function() {
 		<th>ลบ</th>
 	</thead>
 	<tbody>
-<?php
+		<?php
 
-$ser = isset($_GET['ser']) ? $_GET['ser'] : 'u';
-$order_by = ($ser == 'd') ? 'res_dep' : 'res_user';
-	
-$re_sql="SELECT * FROM respon  ORDER BY $order_by ";			
+		$ser = isset($_GET['ser']) ? $_GET['ser'] : 'u';
+		$order_by = ($ser == 'd') ? 'res_dep' : 'res_user';
 
-$i=1;
-	$re_result=dbQuery($re_sql);
-	$re_num=dbNumRows($re_result);
-		if ($re_num>0){
-				while($re_row=dbFetchArray($re_result)){
-						$res_id=$re_row["res_id"];
-						$res_user=$re_row["res_user"];
-						$res_dep=$re_row["res_dep"];
+		$re_sql = "SELECT * FROM respon  ORDER BY $order_by ";
 
-									//  User
-										$ur_sql="SELECT * FROM user WHERE  u_user='$res_user' ";
-										$ur_num=dbNumRows(dbQuery($ur_sql));
+		$i = 1;
+		$re_result = dbQuery($re_sql);
+		$re_num = dbNumRows($re_result);
+		if ($re_num > 0) {
+			while ($re_row = dbFetchArray($re_result)) {
+				$res_id = $re_row["res_id"];
+				$res_user = $re_row["res_user"];
+				$res_dep = $re_row["res_dep"];
 
-									if ($ur_num>0){
-										$ur_row=dbFetchArray(dbQuery($ur_sql));
-											$ur_prefix=$ur_row["u_prefix"];
-											$ur_name=$ur_row["u_name"];
-											$ur_last=$ur_row["u_last"];
-											$ur_dep_id=$ur_row["u_dep_id"];
+				$prer_name = '';
+				$ur_name = '';
+				$ur_last = '';
+				$depr_name = '';
+				$depd_name = '';
 
-														$prer_sql="SELECT * FROM prefix WHERE pre_id='$ur_prefix' ";
-														$prer_row=dbFetchArray(dbQuery($prer_sql));
-														$prer_name=$prer_row["pre_name"];  
+				// User details
+				$ur_sql = "SELECT * FROM user WHERE u_user = ?";
+				$ur_result = dbQueryPrepared($ur_sql, [$res_user]);
+				$ur_row = dbFetchArray($ur_result);
 
-														$depr_sql="SELECT * FROM depart WHERE dep_id='$ur_dep_id' ";
-														$depr_row=dbFetchArray(dbQuery($depr_sql));
-														$depr_name=$depr_row["dep_name"];  
-									}
+				if ($ur_row) {
+					$ur_prefix = $ur_row["u_prefix"];
+					$ur_name = $ur_row["u_name"];
+					$ur_last = $ur_row["u_last"];
+					$ur_dep_id = $ur_row["u_dep_id"];
 
-								// ������  ˹��§ҹ
-										$depd_sql="SELECT * FROM depart WHERE  dep_id='$res_dep' ";
-										$depd_num=dbNumRows(dbQuery($depd_sql));
-									if ($depd_num>0){
-										$depd_row=dbFetchArray(dbQuery($depd_sql));
-											$depd_name=$depd_row["dep_name"];
-									}?>
-									<tr>
-										<td><?=$i?></td>
-										<td><font color="blue"><?=$res_user?></font>:<?=$prer_name?><?=$ur_name?>&nbsp&nbsp<?=$ur_last?>&nbsp&nbsp&nbspสังกัด:<?=$depr_name?></td>
-										<td><?=$depd_name?></td>
-										<td>
-										<?php // echo "thisis"+ $res_id;?>
-											<a
-												href="#" 
-												class="btn btn-warning btn-sm"
-												onclick="load_data('<?=$res_id;?>')"
-												data-toggle="modal" 
-												data-target="#editRelation">
-												แก้ไข 
-											</a>
-										</td>
-										<td>
-											<a href="?delItem=<?=$res_id;?>" class="btn btn-outline-primary btn-sm" id="delItem" name="delItem">ลบ</a>
+					$prer_sql = "SELECT * FROM prefix WHERE pre_id = ?";
+					$prer_result = dbQueryPrepared($prer_sql, [$ur_prefix]);
+					$prer_row = dbFetchArray($prer_result);
+					if ($prer_row) {
+						$prer_name = $prer_row["pre_name"];
+					}
 
-											
-											<!-- <button 
+					$depr_sql = "SELECT * FROM depart WHERE dep_id = ?";
+					$depr_result = dbQueryPrepared($depr_sql, [$ur_dep_id]);
+					$depr_row = dbFetchArray($depr_result);
+					if ($depr_row) {
+						$depr_name = $depr_row["dep_name"];
+					}
+				}
+
+				// Responsibility department
+				$depd_sql = "SELECT * FROM depart WHERE dep_id = ?";
+				$depd_result = dbQueryPrepared($depd_sql, [$res_dep]);
+				$depd_row = dbFetchArray($depd_result);
+				if ($depd_row) {
+					$depd_name = $depd_row["dep_name"];
+				} ?>
+				<tr>
+					<td><?php echo $i; ?></td>
+					<td>
+						<font color="blue"><?php echo $res_user; ?></font>
+						:<?php echo $prer_name; ?><?php echo $ur_name; ?>&nbsp;&nbsp;<?php echo $ur_last; ?>&nbsp;&nbsp;&nbsp;สังกัด:<?php echo $depr_name; ?>
+					</td>
+					<td><?php echo $depd_name; ?></td>
+					<td>
+						<a href="javascript:void(0);" class="btn btn-warning btn-sm"
+							onclick="confirmEdit(() => { load_data('<?php echo $res_id; ?>'); $('#editRelation').modal('show'); })">
+							แก้ไข
+						</a>
+					</td>
+					<td>
+						<a href="javascript:void(0);" onclick="confirmDelete('?delItem=<?php echo $res_id; ?>')"
+							class="btn btn-outline-primary btn-sm" id="delItem" name="delItem">ลบ</a>
+
+
+						<!-- <button 
 													type="button" 
 													class="btn btn-outline-primary btn-sm " 
 													id="deleteItem"
 													name="deleteItem"
 													>ลบ
 											</button> -->
-										</td>
-									</tr>
+					</td>
+				</tr>
 
-									<?php
+				<?php
 
-									$i=$i+1;
-				} //while
+				$i = $i + 1;
+			} //while
 		} else {
 			echo '<tr><td colspan="5" class="text-center">ไม่มีข้อมูลสิทธิ์การกำหนด</td></tr>';
 		} //if
-?>
-</tbody>
+		?>
+	</tbody>
 </table>
 
 
 <!-- แสดงรายละเอียด -->
-  <div class="modal fade" id="editRelation">
-    <div class="modal-dialog modal-xl">
-      <div class="modal-content">
-      
-        <!-- Modal Header -->
-        <div class="modal-header bg-warning">
-          <span class="modal-title"><i class="fas fa-edit"></i> แก้ไข</span>
-          <button type="button" class="close" data-dismiss="modal">×</button>
-        </div>
-        
-        <!-- Modal body -->
-        <div class="modal-body">
-          <div id="divDataview">
-			<!-- ส่วนแสดงผล Model -->
-		  </div>
-        </div>
-        
-        <!-- Modal footer -->
-        <div class="modal-footer">
-          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-        </div>
-        
-      </div>
-    </div>
-  </div>
+<div class="modal fade" id="editRelation">
+	<div class="modal-dialog modal-xl">
+		<div class="modal-content">
+
+			<!-- Modal Header -->
+			<div class="modal-header bg-warning">
+				<span class="modal-title"><i class="fas fa-edit"></i> แก้ไข</span>
+				<button type="button" class="close" data-dismiss="modal">×</button>
+			</div>
+
+			<!-- Modal body -->
+			<div class="modal-body">
+				<div id="divDataview">
+					<!-- ส่วนแสดงผล Model -->
+				</div>
+			</div>
+
+			<!-- Modal footer -->
+			<div class="modal-footer">
+				<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+			</div>
+
+		</div>
+	</div>
+</div>
 
 
 
@@ -139,14 +148,14 @@ $i=1;
 <?php
 
 
-if(isset($_POST['btnUpdate'])){
-	$u_dep=$_POST['u_dep'];
-	$ur_user=$_POST['ur_user'];
-	$res_id=$_POST['res_id'];
+if (isset($_POST['btnUpdate'])) {
+	$u_dep = $_POST['u_dep'];
+	$ur_user = $_POST['ur_user'];
+	$res_id = $_POST['res_id'];
 
-	$sql = "UPDATE respon SET res_user = '$ur_user',res_dep = '$u_dep' WHERE res_id = $res_id ";
-	$result = dbQuery($sql);
-	if($result){
+	$sql = "UPDATE respon SET res_user = ?, res_dep = ? WHERE res_id = ?";
+	$result = dbQueryPrepared($sql, [$ur_user, $u_dep, $res_id]);
+	if ($result) {
 		echo "<script>
 					Swal.fire(
 							'Good job!',
@@ -155,8 +164,8 @@ if(isset($_POST['btnUpdate'])){
 					)
 					window.location.replace('../admin/user_relation.php');
 			  </script>";
-	}else{
-			echo "<script>
+	} else {
+		echo "<script>
 					Swal.fire(
 							'Not work!',
 							'มีบางอย่างผิดพลาด!',
@@ -167,7 +176,7 @@ if(isset($_POST['btnUpdate'])){
 	}
 
 
-	
-   
+
+
 }
-?>			
+?>

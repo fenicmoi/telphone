@@ -164,13 +164,13 @@ if (isset($_GET['reset_id'])) {
   $result = dbQueryPrepared($sql, [$logon_hash, $reset_id]);
   if ($result) {
     echo "<script>
-      swal('เรียบร้อย!', 'รีเซทรหัสผ่านเป็น logon แล้ว', 'success')
+      Swal.fire('เรียบร้อย!', 'รีเซทรหัสผ่านเป็น logon แล้ว', 'success')
       .then(() => {
         window.location.href='user_add.php';
       });
     </script>";
   } else {
-    echo "<script>swal('ไม่สำเร็จ!', 'มีบางอย่างผิดพลาด', 'error');</script>";
+    echo "<script>Swal.fire('ไม่สำเร็จ!', 'มีบางอย่างผิดพลาด', 'error');</script>";
   }
 }
 ?>
@@ -182,33 +182,23 @@ if (isset($_GET['del_id'])) {
   $result = dbQueryPrepared($sql, [$del_id]);
   if ($result) {
     echo "<script>
-    swal({
-      title: 'กำลังจะลบข้อมูล?',
-      text: 'คุณแน่ใจนะ!',
-      icon: 'warning',
-      buttons: true,
-      dangerMode: true,
-    })
-    .then((willDelete) => {
-      if (willDelete) {
-        swal('OK! เรียบร้อยแล้ว', {
+      Swal.fire({
           icon: 'success',
-        });
-        window.location.href='user_add.php';
-      } else {
-        swal('OK!');
-      }
-
-    });
+          title: 'เรียบร้อย!',
+          text: 'ลบข้อมูลผู้ใช้งานแล้ว',
+          confirmButtonText: 'ตกลง'
+      }).then(() => {
+          window.location.href='user_add.php';
+      });
     </script>";
   } else {
     echo "<script>
-swal({
-      title: 'ไม่สำเร็จ!',
-      text: 'มีบางอย่างผิดพลาด ปฏิบัติการไม่สำเร็จ!',
-      icon: 'error',
-      button: 'ตกลง!',
-    });
+      Swal.fire({
+          title: 'ไม่สำเร็จ!',
+          text: 'มีบางอย่างผิดพลาด ปฏิบัติการไม่สำเร็จ!',
+          icon: 'error',
+          confirmButtonText: 'ตกลง',
+      });
     </script>";
   }
 }
@@ -230,34 +220,24 @@ if (isset($_POST['btnInsert'])) {
   $result = dbQueryPrepared($sqlInsert, [$u_type, $u_user, $u_pass_hash, $u_prefix, $u_name, $u_last, $u_dep_id]);
   if ($result) {
     echo "<script>
-            swal({
-              title: 'ระบบกำลังจะบันทึกข้อมูล?',
-              text: 'คุณแน่ใจนะ!',
-              icon: 'warning',
-              buttons: true,
-              dangerMode: true,
-            })
-            .then((willDelete) => {
-              if (willDelete) {
-                swal('OK! เรียบร้อยแล้ว', {
-                  icon: 'success',
-                });
-                window.location.href='user_add.php';
-              } else {
-                swal('OK!');
-              }
-
-            });
-            </script>";
+        Swal.fire({
+          title: 'สำเร็จ!',
+          text: 'บันทึกข้อมูลผู้ใช้งานเรียบร้อยแล้ว',
+          icon: 'success',
+          confirmButtonText: 'ตกลง'
+        }).then(() => {
+          window.location.href='user_add.php';
+        });
+      </script>";
   } else {
     echo "<script>
-    swal({
-              title: 'ผิดพลาด!',
-              text: 'มีบางอย่างผิดพลาด ปฏิบัติการไม่สำเร็จ!',
-              icon: 'error',
-              button: 'ตกลง!',
-            });
-            </script>";
+        Swal.fire({
+          title: 'ผิดพลาด!',
+          text: 'มีบางอย่างผิดพลาด ปฏิบัติการไม่สำเร็จ!',
+          icon: 'error',
+          confirmButtonText: 'ตกลง',
+        });
+      </script>";
   }
 }
 ?>
@@ -284,34 +264,24 @@ if (isset($_POST['btnEdit'])) {
   }
   if ($result) {
     echo "<script>
-            swal({
-              title: 'คุณแน่ใจนะ?',
-              text: 'ระบบกำลังจะทำการแก้ไขรายการ!',
-              icon: 'warning',
-              buttons: true,
-              dangerMode: true,
-            })
-            .then((willDelete) => {
-              if (willDelete) {
-                swal('OK! ระบบแก้ไขเรียบร้อยแล้ว', {
-                  icon: 'success',
-                });
-                window.location.href='user_add.php';
-              } else {
-                swal('คุณไม่แน่ใจอะไรรึ!');
-              }
-
-            });
-            </script>";
+        Swal.fire({
+          title: 'สำเร็จ!',
+          text: 'แก้ไขข้อมูลผู้ใช้งานเรียบร้อยแล้ว',
+          icon: 'success',
+          confirmButtonText: 'ตกลง'
+        }).then(() => {
+          window.location.href='user_add.php';
+        });
+      </script>";
   } else {
     echo "<script>
-    swal({
-              title: 'ผิดพลาด!',
-              text: 'มีบางอย่างผิดพลาด ปฏิบัติการไม่สำเร็จ!',
-              icon: 'error',
-              button: 'ตกลง!',
-            });
-            </script>";
+        Swal.fire({
+          title: 'ผิดพลาด!',
+          text: 'มีบางอย่างผิดพลาด ปฏิบัติการไม่สำเร็จ!',
+          icon: 'error',
+          confirmButtonText: 'ตกลง',
+        });
+      </script>";
   }
 }
 ?>

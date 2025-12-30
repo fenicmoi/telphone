@@ -21,7 +21,8 @@ if (session_status() === PHP_SESSION_NONE) {
 		integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 	<link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
 	<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<script src="../js/confirm.js"></script>
 
 	<!-- bootstrap select -->
 	<link rel="stylesheet" href="../admin/css/bootstrap-select.css">
@@ -90,11 +91,11 @@ include "../connection/function.php";
 
 		<script>
 			function logou() {
-				swal({
+				Swal.fire({
 					title: 'ผิดพลาด!',
 					text: 'มีบางอย่างผิดพลาด!',
 					icon: 'error',
-					button: 'ตกลง!',
+					confirmButtonText: 'ตกลง',
 				}).then(function () {
 					window.location = '../index.php';
 				});

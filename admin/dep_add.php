@@ -145,10 +145,18 @@ if (isset($_POST['btnEdit'])) {
   $sql = "UPDATE depart SET dep_impo = ?, dep_name = ? WHERE dep_id = ?";
   $result = dbQueryPrepared($sql, [$dep_impo, $dep_name, $dep_id]);
   if ($result) {
-    echo "<script>swal('เรียบร้อย!','บันทึกการเปลี่ยนแปลงแล้ว','success');</script>";
-    echo "<script>window.location.href = 'dep_add.php'</script>";
+    echo "<script>
+      Swal.fire({
+        title: 'สำเร็จ!',
+        text: 'แก้ไขข้อมูลหน่วยงานแล้ว!',
+        icon: 'success',
+        confirmButtonText: 'ตกลง'
+      }).then(() => {
+        window.location.href = 'dep_add.php';
+      });
+    </script>";
   } else {
-    echo "<script>swal('ไม่สำเร็จ!','มีบางอย่างผิดพลาด','error');</script>";
+    echo "<script>Swal.fire('ไม่สำเร็จ!','มีบางอย่างผิดพลาด','error');</script>";
   }
 }
 ?>
@@ -159,9 +167,18 @@ if (isset($_GET['dep_id']) && isset($_GET['ac']) && $_GET['ac'] == 'del') {
   $sql = "DELETE FROM depart WHERE dep_id = ?";
   $result = dbQueryPrepared($sql, [$dep_id]);
   if ($result) {
-    echo "<script>swal('เรียบร้อย!','บันทึกการเปลี่ยนแปลงแล้ว','success');</script>";
+    echo "<script>
+      Swal.fire({
+        title: 'สำเร็จ!',
+        text: 'ลบข้อมูลหน่วยงานแล้ว!',
+        icon: 'success',
+        confirmButtonText: 'ตกลง'
+      }).then(() => {
+        window.location.href = 'dep_add.php';
+      });
+    </script>";
   } else {
-    echo "<script>swal('ไม่สำเร็จ!','มีบางอย่างผิดพลาด','error');</script>";
+    echo "<script>Swal.fire('ไม่สำเร็จ!','มีบางอย่างผิดพลาด','error');</script>";
   }
 }
 ?>

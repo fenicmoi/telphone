@@ -21,15 +21,16 @@ $d_num = dbNumRows($d_result); ?>
 					<td><?php echo $d_row["dep_impo"]; ?></td>
 					<td><?php echo $d_row["dep_name"]; ?></td>
 					<td>
-						<a class="btn btn-warning btn-sm" href="#" onclick="load_edit('<?php print $dep_id; ?>');"
-							data-toggle="modal" data-target="#modalEdit">
+						<a class="btn btn-warning btn-sm" href="javascript:void(0);"
+							onclick="confirmEdit(() => { load_edit('<?php print $dep_id; ?>'); $('#modalEdit').modal('show'); });">
 							<i class="fas fa-pencil-alt"></i>
 						</a>
 					</td>
-					<td><a class="btn btn-danger btn-sm" href="?dep_id=<?php echo $dep_id; ?>&ac=del"><i
+					<td><a class="btn btn-danger btn-sm" href="javascript:void(0);"
+							onclick="confirmDelete('?dep_id=<?php echo $dep_id; ?>&ac=del')"><i
 								class="fas fa-trash-alt"></i></a></td>
 				</tr>
-			<?php
+				<?php
 			}
 		}
 		?>

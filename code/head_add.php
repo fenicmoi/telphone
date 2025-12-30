@@ -62,19 +62,21 @@ if (isset($_POST['btnSearch'])) {
 							<td><?php print $g_row['g_impo']; ?></td>
 							<td>
 								<span class="font-weight-bold"><?php print $g_row['g_position']; ?></span><br>
-								<a href="#" onclick="load_data('<?php echo $g_row['g_id']; ?>');" data-toggle="modal"
+								<a href="javascript:void(0);" onclick="load_data('<?php echo $g_row['g_id']; ?>');" data-toggle="modal"
 									data-target="#modDetail">
 									<i class="fas fa-address-card"></i> <?php print $g_row['g_head_th']; ?>
 								</a>
 							</td>
 							<td>
-								<a href="#" onclick="load_edit('<?php echo $g_row['g_id']; ?>');" data-toggle="modal"
-									data-target="#modEdit" class="btn btn-warning btn-sm">
+								<a href="javascript:void(0);"
+									onclick="confirmEdit(() => { load_edit('<?php echo $g_row['g_id']; ?>'); $('#modEdit').modal('show'); });"
+									class="btn btn-warning btn-sm">
 									<i class="fas fa-edit"></i> แก้ไข
 								</a>
 							</td>
 							<!-- <td><button class="btn btn-warning btn-sm"><i class="fas fa-edit"></i> แก้ไข</button></td> -->
-							<td><button class="btn btn-dark btn-sm"><i class="fas fa-trash"></i> ลบ</button></td>
+							<td><a href="javascript:void(0);" onclick="confirmDelete('?g_id=<?php echo $g_row['g_id']; ?>&ac=del')"
+									class="btn btn-dark btn-sm"><i class="fas fa-trash"></i> ลบ</a></td>
 						</tr>
 						<?php
 					} // end while

@@ -82,11 +82,11 @@ if (isset($_POST['btnInsert'])) {
   $num = dbNumRows($result);
   if ($num > 0) {
     echo "<script>
-              swal({
+              Swal.fire({
                     title: 'ชื่อสังกัดซ้ำ!',
                     text: 'ระบบมีชื่อนี้อยู่แล้ว!',
                     icon: 'error',
-                    button: 'ตกลง!',
+                    confirmButtonText: 'ตกลง',
               });
              </script>";
     exit();
@@ -94,9 +94,9 @@ if (isset($_POST['btnInsert'])) {
     $sql = "INSERT INTO ministry(m_impo, m_name) VALUES (?, ?)";
     $result = dbQueryPrepared($sql, [$m_impo, $m_name]);
     if ($result) {
-      echo "<script>swal('เรียบร้อย!','บันทึกการเปลี่ยนแปลงแล้ว','success');</script>";
+      echo "<script>Swal.fire('เรียบร้อย!','บันทึกการเปลี่ยนแปลงแล้ว','success').then(() => { window.location.href='minis_add.php'; });</script>";
     } else {
-      echo "<script>swal('ไม่สำเร็จ!','มีบางอย่างผิดพลาด','error');</script>";
+      echo "<script>Swal.fire('ไม่สำเร็จ!','มีบางอย่างผิดพลาด','error');</script>";
     }
   } //check num
 }
@@ -111,9 +111,9 @@ if (isset($_POST['btnEdit'])) {
   $sql = "UPDATE ministry SET m_impo = ?, m_name = ? WHERE m_id = ?";
   $result = dbQueryPrepared($sql, [$m_impo, $m_name, $m_id]);
   if ($result) {
-    echo "<script>swal('เรียบร้อย!','บันทึกการเปลี่ยนแปลงแล้ว','success');</script>";
+    echo "<script>Swal.fire('เรียบร้อย!','บันทึกการเปลี่ยนแปลงแล้ว','success').then(() => { window.location.href='minis_add.php'; });</script>";
   } else {
-    echo "<script>swal('ไม่สำเร็จ!','มีบางอย่างผิดพลาด','error');</script>";
+    echo "<script>Swal.fire('ไม่สำเร็จ!','มีบางอย่างผิดพลาด','error');</script>";
   }
 }
 ?>
@@ -124,9 +124,9 @@ if (isset($_GET['m_id'])) {
   $sql = "DELETE FROM ministry WHERE m_id = ?";
   $result = dbQueryPrepared($sql, [$m_id]);
   if ($result) {
-    echo "<script>swal('เรียบร้อย!','บันทึกการเปลี่ยนแปลงแล้ว','success');</script>";
+    echo "<script>Swal.fire('เรียบร้อย!','บันทึกการเปลี่ยนแปลงแล้ว','success').then(() => { window.location.href='minis_add.php'; });</script>";
   } else {
-    echo "<script>swal('ไม่สำเร็จ!','มีบางอย่างผิดพลาด','error');</script>";
+    echo "<script>Swal.fire('ไม่สำเร็จ!','มีบางอย่างผิดพลาด','error');</script>";
   }
 }
 ?>

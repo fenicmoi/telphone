@@ -35,13 +35,14 @@ $num_row = dbNumRows($presee_result);
           <td><?php echo $r["m_impo"]; ?></td>
           <td><?php echo $r["m_name"]; ?></td>
           <td>
-            <a class="btn btn-warning btn-sm" href="#" onclick="load_edit('<?php print $m_id; ?>');" data-toggle="modal"
-              data-target="#modalEdit">
+            <a class="btn btn-warning btn-sm" href="javascript:void(0);"
+              onclick="confirmEdit(() => { load_edit('<?php print $m_id; ?>'); $('#modalEdit').modal('show'); });">
               <i class="fas fa-pencil-alt"></i>
             </a>
           </td>
           <td>
-            <a class="btn btn-danger btn-sm" href="?m_id=<?php echo $m_id; ?>&del=del"><i class="fas fa-trash-alt"></i></a>
+            <a class="btn btn-danger btn-sm" href="javascript:void(0);"
+              onclick="confirmDelete('?m_id=<?php echo $m_id; ?>&del=del')"><i class="fas fa-trash-alt"></i></a>
           </td>
         </tr>
 
