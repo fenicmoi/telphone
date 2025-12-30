@@ -69,14 +69,22 @@ $s_name = $s_row['m_name'];
               </div>
             </td>
             <td>
-              <div align=left><?php echo setformat($g_phone) ?> </div>
+              <div align=left>
+                 <?php if(!empty($g_phone)) { ?>
+                <a href="tel:<?php echo $g_phone; ?>" class="btn btn-outline-success btn-sm">
+                  <i class="fas fa-phone-alt"></i> <?php echo setformat($g_phone); ?>
+                </a>
+                 <?php } else { echo "-"; } ?>
+              </div>
             </td>
 
             <td>
               <div align=left>
-                <a href="tel:<?php echo $g_mobile; ?>" style="color: inherit; text-decoration: none;">
-                  <?php echo setformat($g_mobile) ?>
+                <?php if(!empty($g_mobile)) { ?>
+                <a href="tel:<?php echo $g_mobile; ?>" class="btn btn-outline-primary btn-sm">
+                  <i class="fas fa-mobile-alt"></i> <?php echo setformat($g_mobile); ?>
                 </a>
+                <?php } else { echo "-"; } ?>
               </div>
             </td>
             <td class="d-none d-md-table-cell">

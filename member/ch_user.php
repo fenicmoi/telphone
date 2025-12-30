@@ -1,8 +1,7 @@
 <?php
 include './header.php';
-?>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
-<?php
+include '../connection/csrf.php';
+verify_csrf_token($_POST['csrf_token']);
 $u_user = $_POST['u_user'];
 $u_pass_input = $_POST['u_pass'];
 

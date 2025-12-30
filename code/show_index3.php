@@ -71,7 +71,13 @@
                     <?php
                     echo '<BR><BR></div></td>';
                     echo "<td colspan=300><div align=left>$g_add </div></td>";
-                    echo "<td colspan=200><div align=left>$g_phone </div></td>";
+                    echo "<td colspan=200><div align=left>";
+                    if (!empty($g_phone)) {
+                        echo "<a href='tel:$g_phone' class='btn btn-outline-success btn-sm'><i class='fas fa-phone-alt'></i> " . setformat($g_phone) . "</a>";
+                    } else {
+                        echo "-";
+                    }
+                    echo "</div></td>";
                     echo "<td colspan=300><div align=left>$g_web <BR>$g_email</div></td></tr>";
                 }
             }

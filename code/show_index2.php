@@ -68,16 +68,28 @@
                             </td>
                             <td>
                                 <div align=left>
-                                    <?php
-                                    echo setformat($g_phone);
-                                    ?>
+                                    <?php if (!empty($g_phone)) { ?>
+                                        <a href="tel:<?php echo $g_phone; ?>" class="btn btn-outline-success btn-sm">
+                                            <i class="fas fa-phone-alt"></i> <?php echo setformat($g_phone); ?>
+                                        </a>
+                                    <?php } else {
+                                        echo "-";
+                                    } ?>
                                 </div>
                             </td>
                             <td>
                                 <div align=left><?php echo setformat($g_fax); ?> </div>
                             </td>
                             <td>
-                                <div align=left><?php echo setformat($g_mobile); ?> </div>
+                                <div align=left>
+                                    <?php if (!empty($g_mobile)) { ?>
+                                        <a href="tel:<?php echo $g_mobile; ?>" class="btn btn-outline-primary btn-sm">
+                                            <i class="fas fa-mobile-alt"></i> <?php echo setformat($g_mobile); ?>
+                                        </a>
+                                    <?php } else {
+                                        echo "-";
+                                    } ?>
+                                </div>
                             </td>
                             <td>
                                 <div align=left><?php echo $g_web; ?><br>

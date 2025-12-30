@@ -192,6 +192,7 @@ error_reporting(E_ALL ^ E_NOTICE);
         </div>
         <div class="modal-body p-4">
           <form action="member/ch_user.php" method="post" name="userlogin" id="userlogin">
+            <?php csrf_field(); ?>
             <div class="form-group mb-4">
               <label class="text-muted small font-weight-bold">ชื่อผู้ใช้งาน</label>
               <div class="input-group">
