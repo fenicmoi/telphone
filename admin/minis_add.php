@@ -18,6 +18,10 @@ include "header.php";
           <span class="input-group-text">ชื่อต้นสังกัด</span>
         </div>
         <input name="m_name" type="text" id="m_name" class="form-control col-10" required>
+        <div id="duplicate_msg"
+          style="color: red; font-size: 0.9em; margin-top: 5px; display: none; margin-left: 5px; width: 100%;">
+          <i class="fas fa-exclamation-circle"></i> This department name is already registered.
+        </div>
         &nbsp;
         <div class="input-group-prepend">
           <span class="input-group-text">ลำดับที่</span>
@@ -135,8 +139,40 @@ if (isset($_GET['m_id'])) {
 
 <!--  javascript -->
 <script>
+
   $(document).ready(function () {
     $('#show_minis').DataTable();
+
+    // duplicate check
+    $('#m_name').on('keyup change', function () {
+      var m_name = $(this).val();
+      if (m_name.length > 0) {
+        $.ajax({
+          url: 'check_minis_duplicate.php',
+          method: 'POST',
+          data: { m_name: m_name },
+          success: function (data) {
+            if (data.exists) {
+              $('#duplicate_msg').show();
+              $('#btnInsert').prop('disabled', true);
+              $('#m_name').addClass('is-invalid');
+            } else {
+              $('#duplicate_msg').hide();
+              $('#btnInsert').prop('disabled', false);
+              $('#m_name').removeClass('is-invalid');
+            }
+          },
+          error: function () {
+            console.error("Error checking duplicate");
+          }
+        });
+      } else {
+        $('#duplicate_msg').hide();
+        $('#btnInsert').prop('disabled', false);
+        $('#m_name').removeClass('is-invalid');
+      }
+    });
+
   });
 
 

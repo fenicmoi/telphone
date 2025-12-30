@@ -31,6 +31,9 @@ if ($u_num > 0) {
           </div>
           <input type="text" name="d_name" id="d_name" class="form-control col-10" placeholder="ระบุชื่อหน่วยงาน"
             required>
+          <div id="duplicate_msg" style="color: red; font-size: 0.9em; margin-top: 5px; display: none; margin-left: 5px; width: 100%;">
+            <i class="fas fa-exclamation-circle"></i> ชื่อหน่วยงานนี้มีอยู่ในระบบแล้ว
+          </div>
 
           <div class="input-group-prepend">
             <span class="input-group-text"><i class="fas fa-sort-numeric-up"></i></span>
@@ -192,4 +195,39 @@ if (isset($_GET['dep_id']) && isset($_GET['ac']) && $_GET['ac'] == 'del') {
     };
     $('#divDataview').load('show_depart_edit.php', sdata);
   }
+
+  $(document).ready(function () {
+    // duplicate check
+    $('#d_name').on('keyup change', function () {
+      var d_name = $(this).val();
+      if (d_name.length > 0) {
+        $.ajax({
+          url: 'check_dep_duplicate.php',
+          method: 'POST',
+          data: {
+            d_name: d_name
+          },
+          success: function (data) {
+            if (data.exists) {
+              $('#duplicate_msg').show();
+              $('[name="btnInsert"]').prop('disabled', true);
+              $('#d_name').addClass('is-invalid');
+            } else {
+              $('#duplicate_msg').hide();
+              $('[name="btnInsert"]').prop('disabled', false);
+              $('#d_name').removeClass('is-invalid');
+            }
+          },
+          error: function () {
+            console.error("Error checking duplicate");
+          }
+        });
+      } else {
+        $('#duplicate_msg').hide();
+        $('[name="btnInsert"]').prop('disabled', false);
+        $('#d_name').removeClass('is-invalid');
+      }
+    });
+
+  });
 </script>
