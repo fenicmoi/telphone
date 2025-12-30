@@ -11,14 +11,16 @@ include '../connection/StartConnect.php';
 $u_user = $_SESSION['u_user'];
 $test = $_POST['oldPassword'];
 
-$sql = "SELECT * FROM user WHERE u_user = ? AND u_pass = ?";
-$result = dbQueryPrepared($sql, [$u_user, $test]);
-$numrow = dbNumRows($result);
+// Fetch hashed password from DB
+$sql = "SELECT u_pass FROM user WHERE u_user = ?";
+$result = dbQueryPrepared($sql, [$u_user]);
+$u_row = dbFetchArray($result);
 
-if ($numrow <> 0) {
-    $msg = 1;
-} else {
-    $msg = 0;
+$msg = 0;
+if ($u_row) {
+    if (password_verify($test, $u_row['u_pass']) || $test === $u_row['u_pass']) {
+        $msg = 1;
+    }
 }
 
 echo json_encode(["success" => $msg]);

@@ -1,18 +1,20 @@
+<?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+if (!isset($_SESSION['u_user']) || $_SESSION['u_type'] !== 'a') {
+    die("Unauthorized access");
+}
+include "../connection/StartConnect.php";
+?>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 <!-- bootstrap select -->
 <link rel="stylesheet" href="css/bootstrap-select.css">
 <script src="js/bootstrap-select.js"></script>
 <script type="text/javascript">
-    $('.selectpicker').selectpicker({
-    });
+    $('.selectpicker').selectpicker({});
 </script>
-<?php
-session_start();
-if (!isset($_SESSION['u_user']) || $_SESSION['u_type'] !== 'a') {
-    die("Unauthorized access");
-}
-include "../connection/StartConnect.php";
 
 $u_id = $_POST['u_id'];
 $sql = "SELECT * FROM user WHERE u_id = ?";

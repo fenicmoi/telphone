@@ -155,8 +155,9 @@ include "header.php";
 <?php  ############ RESET ##############
 if (isset($_GET['reset_id'])) {
   $reset_id = $_GET['reset_id'];
-  $sql = "UPDATE user SET u_pass = 'logon' WHERE u_id = ?";
-  $result = dbQueryPrepared($sql, [$reset_id]);
+  $logon_hash = password_hash('logon', PASSWORD_DEFAULT);
+  $sql = "UPDATE user SET u_pass = ? WHERE u_id = ?";
+  $result = dbQueryPrepared($sql, [$logon_hash, $reset_id]);
   if ($result) {
     echo "<script>
       swal('เรียบร้อย!', 'รีเซทรหัสผ่านเป็น logon แล้ว', 'success')
@@ -218,10 +219,11 @@ if (isset($_POST['btnInsert'])) {
   $u_prefix = $_POST['prefix'];
   $u_name = $_POST['u_name'];
   $u_last = $_POST['u_last'];
+  $u_pass_hash = password_hash($u_pass, PASSWORD_DEFAULT);
 
   $sqlInsert = "INSERT INTO user(u_type, u_user, u_pass, u_prefix, u_name, u_last, u_dep_id)
                        VALUES (?, ?, ?, ?, ?, ?, ?)";
-  $result = dbQueryPrepared($sqlInsert, [$u_type, $u_user, $u_pass, $u_prefix, $u_name, $u_last, $u_dep_id]);
+  $result = dbQueryPrepared($sqlInsert, [$u_type, $u_user, $u_pass_hash, $u_prefix, $u_name, $u_last, $u_dep_id]);
   if ($result) {
     echo "<script>
             swal({
@@ -269,8 +271,9 @@ if (isset($_POST['btnEdit'])) {
   $u_last = $_POST['u_last'];
 
   if (!empty($u_pass)) {
+    $u_pass_hash = password_hash($u_pass, PASSWORD_DEFAULT);
     $sql = "UPDATE user SET u_type=?, u_user=?, u_pass=?, u_prefix=?, u_name=?, u_last=?, u_dep_id=? WHERE u_id=?";
-    $result = dbQueryPrepared($sql, [$u_type, $u_user, $u_pass, $u_prefix, $u_name, $u_last, $u_dep_id, $u_id]);
+    $result = dbQueryPrepared($sql, [$u_type, $u_user, $u_pass_hash, $u_prefix, $u_name, $u_last, $u_dep_id, $u_id]);
   } else {
     $sql = "UPDATE user SET u_type=?, u_user=?, u_prefix=?, u_name=?, u_last=?, u_dep_id=? WHERE u_id=?";
     $result = dbQueryPrepared($sql, [$u_type, $u_user, $u_prefix, $u_name, $u_last, $u_dep_id, $u_id]);

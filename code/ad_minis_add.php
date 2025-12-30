@@ -1,20 +1,28 @@
 <?php    ### ส่วนเพิ่มกระทรวง
-$recal= isset($_GET['recal']) ? $_GET['recal'] : '';		//แก้ไขปัญหา Notis
+session_start();
+if (!isset($_SESSION['u_user']) || $_SESSION['u_type'] !== 'a') {
+	exit('Unauthorized');
+}
 
-if(($recal=='recal') && ($a_dep!=NULL)){
-		$chd_sql="SELECT * FROM ministry  WHERE  m_name='$a_dep'  ";
-		$chd_num=dbNumRows(mysql_query($chd_sql));
-			if ($chd_num>0){?>
-				<script language="javascript">
-					alert("�������ö���� �ѧ�Ѵ�ͧ˹��§ҹ �� \n ���ͧ�ҡ ��� �Ѻ�����ŷ�����������"); 
-				</script> <?
-			}else{
-					$add_sql="INSERT INTO ministry  VALUES ('0' , '$a_impo' , '$a_dep')";
-					$add_result1=dbQuery($add_sql);
-					?>
-				<script language="javascript">
-					alert("เพิ่มเติมข้อมูลแล้ว"); 
-				</script> <?
-			}
+$recal = isset($_GET['recal']) ? $_GET['recal'] : '';
+$a_dep = isset($_POST['a_dep']) ? $_POST['a_dep'] : null;
+$a_impo = isset($_POST['a_impo']) ? $_POST['a_impo'] : 0;
+
+if (($recal == 'recal') && ($a_dep != null)) {
+	$chd_sql = "SELECT * FROM ministry WHERE m_name = ?";
+	$chd_result = dbQueryPrepared($chd_sql, [$a_dep]);
+	$chd_num = dbNumRows($chd_result);
+	if ($chd_num > 0) { ?>
+		<script language="javascript">
+			alert("ไม่สามารถเพิ่มได้ เนื่องจากมีชื่อนี้อยู่ในระบบแล้ว");
+		</script>
+	<?php } else {
+		$add_sql = "INSERT INTO ministry (m_impo, m_name) VALUES (?, ?)";
+		$add_result1 = dbQueryPrepared($add_sql, [$a_impo, $a_dep]);
+		?>
+		<script language="javascript">
+			alert("เพิ่มเติมข้อมูลแล้ว");
+		</script>
+	<?php }
 }
 ?>

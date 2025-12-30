@@ -66,23 +66,30 @@ if ($u_num > 0) {
           $m_name2 = "กระทรวงมหาดไทย";
         } ?>
         <div class="input-group">
-          <!-- <select class="form-control col-6" name="minis2" id="minis2"> -->
-          <select class=" selectpicker form-control col-2" data-live-search="true" title="โปรดระบุ" name="minis2"
+          <select class="selectpicker form-control col-2" data-live-search="true" title="โปรดระบุ" name="minis2"
             id="minis2">
-            <option value="<?php echo "$minis2"; ?>" selected><?php echo "$m_name2"; ?></option>
             <?php
-            $presee_sql = "SELECT * FROM ministry  ORDER BY m_impo";
+            if (isset($_POST["btnSearch"])) {
+              $minis2 = $_POST["minis2"];
+              $m2_sql = "SELECT * FROM ministry WHERE m_id = ?";
+              $m2_res = dbQueryPrepared($m2_sql, [$minis2]);
+              $msee2_row = dbFetchArray($m2_res);
+              $m_name2 = $msee2_row ? $msee2_row["m_name"] : "กระทรวงมหาดไทย";
+            } else {
+              $minis2 = "12";
+              $m_name2 = "กระทรวงมหาดไทย";
+            }
+            ?>
+            <option value="<?php echo htmlspecialchars($minis2); ?>" selected><?php echo htmlspecialchars($m_name2); ?>
+            </option>
+            <?php
+            $presee_sql = "SELECT * FROM ministry ORDER BY m_impo";
             $presee_result = dbQuery($presee_sql);
-            $presee_num = dbNumRows($presee_result);
-            if ($presee_num > 0) {
-              while ($presee_row = dbFetchArray($presee_result)) {
-                $m_id2 = $presee_row["m_id"];
-                $m_name2 = $presee_row["m_name"];
-                ?>
-                <option value="<?php echo "$m_id2" ?>"><?php echo "$m_name2" ?></option>
-              <?php } //end while
-            } else { ?>
-              <option value="0">NoData</option>
+            while ($presee_row = dbFetchArray($presee_result)) {
+              $m_id2 = $presee_row["m_id"];
+              $m_name2 = $presee_row["m_name"];
+              ?>
+              <option value="<?php echo htmlspecialchars($m_id2); ?>"><?php echo htmlspecialchars($m_name2); ?></option>
             <?php } ?>
           </select>
           <button type="submit" class="btn btn-primary" name="btnSearch"><i class="fas  fa-search"></i> ค้นหา</button>
@@ -135,26 +142,22 @@ if (isset($_POST['btnEdit'])) {
   $dep_impo = $_POST['dep_impo'];
   $dep_id = $_POST['dep_id'];
 
-  $sql = "UPDATE depart SET  dep_impo = '$dep_impo', dep_name = '$dep_name' WHERE dep_id = $dep_id";
-  echo $sql;
-
-  $result = dbQuery($sql);
+  $sql = "UPDATE depart SET dep_impo = ?, dep_name = ? WHERE dep_id = ?";
+  $result = dbQueryPrepared($sql, [$dep_impo, $dep_name, $dep_id]);
   if ($result) {
     echo "<script>swal('เรียบร้อย!','บันทึกการเปลี่ยนแปลงแล้ว','success');</script>";
     echo "<script>window.location.href = 'dep_add.php'</script>";
-
   } else {
     echo "<script>swal('ไม่สำเร็จ!','มีบางอย่างผิดพลาด','error');</script>";
   }
-
 }
 ?>
 
 <?php    ####### ลบหน่วยงาน ######
-if (isset($_GET['dep_id'])) {
+if (isset($_GET['dep_id']) && isset($_GET['ac']) && $_GET['ac'] == 'del') {
   $dep_id = $_GET['dep_id'];
-  $sql = "DELETE FROM depart WHERE dep_id = $dep_id";
-  $result = dbQuery($sql);
+  $sql = "DELETE FROM depart WHERE dep_id = ?";
+  $result = dbQueryPrepared($sql, [$dep_id]);
   if ($result) {
     echo "<script>swal('เรียบร้อย!','บันทึกการเปลี่ยนแปลงแล้ว','success');</script>";
   } else {

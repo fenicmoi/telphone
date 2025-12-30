@@ -5,8 +5,9 @@ if ($minis == '') {
   $minis = 12;
 }
 
-$s_sql = "SELECT * FROM ministry WHERE  m_id='$minis' ";
-$s_row = dbFetchArray($s_result = dbQuery($s_sql));
+$s_sql = "SELECT * FROM ministry WHERE m_id = ? ";
+$s_result = dbQueryPrepared($s_sql, [$minis]);
+$s_row = dbFetchArray($s_result);
 $s_name = $s_row['m_name'];
 ?>
 <table class="table table-bordered">

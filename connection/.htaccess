@@ -1,0 +1,10 @@
+# Deny access to sensitive files
+<FilesMatch "\.(inc|bak|php)$">
+  Order allow,deny
+  Deny from all
+</FilesMatch>
+
+# Allow index.php for some internal redirection if needed (though usually not)
+<Files "index.php">
+  Allow from all
+</Files>

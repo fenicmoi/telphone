@@ -1,23 +1,39 @@
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
 <?php
 include './header.php';
-if (session_status() === PHP_SESSION_NONE) {
-	session_start();
-}
+?>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+<?php
 $u_user = $_POST['u_user'];
-$u_pass = $_POST['u_pass'];
+$u_pass_input = $_POST['u_pass'];
 
+// Fetch user by username only
 $u_sql = "SELECT u.*, p.pre_name, d.dep_name FROM user as u
-	          INNER JOIN prefix as p ON p.pre_id = u.u_prefix 
-			  INNER JOIN depart as d ON d.dep_id = u.u_dep_id
-			  WHERE u.u_user = ? AND u.u_pass = ?";
+          INNER JOIN prefix as p ON p.pre_id = u.u_prefix 
+          INNER JOIN depart as d ON d.dep_id = u.u_dep_id
+          WHERE u.u_user = ?";
 
-$result = dbQueryPrepared($u_sql, [$u_user, $u_pass]);
-$u_num = dbNumRows($result);
+$result = dbQueryPrepared($u_sql, [$u_user]);
+$u_row = dbFetchArray($result);
 
-if ($u_num == 1) {
-	$u_row = dbFetchArray($result);
+$login_success = false;
+if ($u_row) {
+	$db_pass = $u_row['u_pass'];
 
+	// Check if the password matches (hashed or plaintext)
+	if (password_verify($u_pass_input, $db_pass)) {
+		$login_success = true;
+	} elseif ($u_pass_input === $db_pass) {
+		// Plaintext match - login success and start migration
+		$login_success = true;
+
+		// Auto-migrate to hashed password
+		$new_hash = password_hash($u_pass_input, PASSWORD_DEFAULT);
+		$update_sql = "UPDATE user SET u_pass = ? WHERE u_id = ?";
+		dbQueryPrepared($update_sql, [$new_hash, $u_row['u_id']]);
+	}
+}
+
+if ($login_success) {
 	$u_id = $u_row['u_id'];
 	$u_user = $u_row['u_user'];
 	$u_type = $u_row['u_type'];
