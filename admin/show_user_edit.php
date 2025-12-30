@@ -7,19 +7,17 @@ if (!isset($_SESSION['u_user']) || $_SESSION['u_type'] !== 'a') {
 }
 include "../connection/StartConnect.php";
 ?>
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-
 <!-- bootstrap select -->
 <link rel="stylesheet" href="css/bootstrap-select.css">
-<script src="js/bootstrap-select.js"></script>
-<script type="text/javascript">
-    $('.selectpicker').selectpicker({});
-</script>
 
+<?php
 $u_id = $_POST['u_id'];
 $sql = "SELECT * FROM user WHERE u_id = ?";
 $result = dbQueryPrepared($sql, [$u_id]);
 $row = dbFetchAssoc($result);
+if (!$row) {
+    die("<div class='alert alert-danger'>ไม่พบข้อมูลผู้ใช้ (User not found)</div>");
+}
 $u_type = $row["u_type"];
 $pre_id = $row["u_prefix"];
 $dep_id = $row["u_dep_id"];
@@ -29,19 +27,20 @@ $dep_id = $row["u_dep_id"];
         <div class="input-group">
             <div class="input-group-prepend">
                 <span class="input-group-text">หน่วยงาน</span>
-                <select name="depart" id="depart" class="selectpicker" data-live-search="true" title="โปรดระบุ">
-                    <?php
-                    $sql_dep = "SELECT * FROM depart  ORDER BY dep_impo";
-                    $result_dep = dbQuery($sql_dep);
-                    while ($row_dep = dbFetchArray($result_dep)) { ?>
-                        <option value="<?php echo $row_dep['dep_id']; ?>" <?php if ($dep_id == $row_dep['dep_id']) {
-                               echo "selected";
-                           } ?>>
-                            <?php echo $row_dep['dep_name']; ?>
-                        </option>
-                    <?php } ?>
-                </select>
             </div>
+            <select name="depart" id="depart" class="selectpicker form-control" data-live-search="true"
+                title="โปรดระบุ">
+                <?php
+                $sql_dep = "SELECT * FROM depart  ORDER BY dep_impo";
+                $result_dep = dbQuery($sql_dep);
+                while ($row_dep = dbFetchArray($result_dep)) { ?>
+                    <option value="<?php echo $row_dep['dep_id']; ?>" <?php if ($dep_id == $row_dep['dep_id']) {
+                           echo "selected";
+                       } ?>>
+                        <?php echo $row_dep['dep_name']; ?>
+                    </option>
+                <?php } ?>
+            </select>
         </div>
         <br>
         <div class="input-group">
@@ -73,7 +72,7 @@ $dep_id = $row["u_dep_id"];
             <div class="input-group-prepend">
                 <span class="input-group-text">คำนำหน้า</span>
             </div>
-            <select class=" selectpicker form-control col-2" data-live-search="true" title="โปรดระบุ" name="prefix"
+            <select class="selectpicker form-control col-2" data-live-search="true" title="โปรดระบุ" name="prefix"
                 id="prefix">
                 <?php
                 $sql = "SELECT * FROM prefix ORDER BY pre_id";
@@ -89,16 +88,14 @@ $dep_id = $row["u_dep_id"];
 
             <div class="input-group-prepend">
                 <span class="input-group-text">ชื่อ</span>
-                <input type="text" id="u_name" name="u_name" class="form-control"
-                    value="<?php print $row['u_name']; ?>">
             </div>
+            <input type="text" id="u_name" name="u_name" class="form-control" value="<?php print $row['u_name']; ?>">
 
 
             <div class="input-group-prepend">
                 <span class="input-group-text">นามสกุล</span>
-                <input type="text" id="u_last" name="u_last" class="form-control"
-                    value="<?php print $row['u_last']; ?>">
             </div>
+            <input type="text" id="u_last" name="u_last" class="form-control" value="<?php print $row['u_last']; ?>">
         </div>
     </div> <!-- form-group -->
     <br>
@@ -109,3 +106,12 @@ $dep_id = $row["u_dep_id"];
     </center>
     <input type="hidden" name="dep_id" id="dep_id" value="<?php echo $dep_id; ?>">
 </form>
+
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="js/bootstrap-select.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.selectpicker').selectpicker('refresh');
+        $('.selectpicker').selectpicker({});
+    });
+</script>
