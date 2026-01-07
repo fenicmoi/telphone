@@ -114,6 +114,7 @@ $resultDep = dbQueryPrepared($sqlDep, [$u_user]);
       </div>
     </div>
   </div>
+</div>
 
 
 
